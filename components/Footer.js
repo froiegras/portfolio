@@ -4,7 +4,10 @@ import React from 'react';
 function Footer() {
   return (
     <footer>
-      {/* Additional information or links */}
+      <h2>Contact Me</h2>
+        <p>Phone No.: 09502897886</p>
+        <p>Email Address: frlndivina@gmail.com</p>
+        <p>Home Address: 159 Caimito, Cembo, Taguig City</p>
     </footer>
   );
 }

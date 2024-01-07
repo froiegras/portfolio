@@ -4,7 +4,7 @@ import React from 'react';
 function Education() {
   return (
     <section id="education">
-      {/* Your education details go here */}
+      <h1>Education</h1>
     </section>
   );
 }
