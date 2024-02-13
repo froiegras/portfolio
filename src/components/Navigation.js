@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 
 function Navigation({ onNavItemClick }) {
   return (
-    <nav className="flex h-screen sticky">
-      <div className='className="sidebar bg-gray-800 text-white p-4 w-flex'>
+    <nav>
+      <div className='h-screen bg-gray-800 text-white p-4'>
         <button onClick={() => onNavItemClick('home')}>Home</button> <br />
         <button onClick={() => onNavItemClick('education')}>Education</button> <br />
         <button onClick={() => onNavItemClick('skills')}>Skills</button> <br />

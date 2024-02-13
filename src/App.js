@@ -17,11 +17,15 @@ function App() {
   return (
     <div>
       <Header />
-      <Navigation onNavItemClick = {handleNavItemClick} />
-      {selectedComponent === 'home' && <Education />}
-      {selectedComponent === 'education' && <Education />}
-      {selectedComponent === 'skills' && <Skills />}
-      {selectedComponent === 'work' && <Work />}
+      <div className="grid grid-cols-5">
+        <Navigation onNavItemClick = {handleNavItemClick} />
+        <div className='col-span-4'>
+        {selectedComponent === 'home' && <Education />}
+        {selectedComponent === 'education' && <Education />}
+        {selectedComponent === 'skills' && <Skills />}
+        {selectedComponent === 'work' && <Work />}
+        </div>
+      </div>
       <Footer />
     </div>
   );

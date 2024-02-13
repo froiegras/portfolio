@@ -3,11 +3,11 @@ import React from 'react';
 
 function Projects() {
   return (
-    <section id="projects">
+    <div className='h-screen bg-gray-600 text-white p-4'>
       <h1>Notable Projects</h1>
         <h2>Soundboard Discord Bot</h2>
         <h2>Portfolio</h2>
-    </section>
+    </div>
   );
 }
 
