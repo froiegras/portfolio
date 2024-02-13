@@ -6,10 +6,10 @@ function Navigation({ onNavItemClick }) {
   return (
     <nav>
       <div className='h-screen bg-gray-800 text-white p-4'>
-        <button onClick={() => onNavItemClick('home')}>Home</button> <br />
-        <button onClick={() => onNavItemClick('education')}>Education</button> <br />
         <button onClick={() => onNavItemClick('skills')}>Skills</button> <br />
+        <button onClick={() => onNavItemClick('education')}>Education</button> <br />
         <button onClick={() => onNavItemClick('work')}>Work Experience</button>
+        <button onClick={() => onNavItemClick('projects')}>Notable Projects</button> <br />
       </div>
     </nav>
   );
