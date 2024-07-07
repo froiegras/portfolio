@@ -17,7 +17,7 @@ function App() {
   };
 
   return (
-    <div>
+    <div className='p-5 bg-[#fdfaf8]'>
       <Header />
       <div className="grid grid-cols-5">
         <Navigation onNavItemClick = {handleNavItemClick} />

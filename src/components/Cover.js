@@ -3,7 +3,7 @@ import React from 'react';
 
 function Cover() {
   return (
-    <div className='h-screen bg-gray-600 text-white p-4'>
+    <div className='h-screen bg-[#fdfaf8] text-black p-4'>
       <h1>Cover Letter</h1>
     </div>
   );
