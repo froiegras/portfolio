@@ -5,6 +5,9 @@ module.exports = {
     './public/index.html',
   ],
   theme: {
+    fontFamily: {
+      'sans': [ 'Rubik', 'Roboto Slab', 'Arial'],
+    },
     extend: {},
   },
   plugins: [],
