@@ -5,7 +5,3 @@
 .educ-text {
     @apply text-base font-bold border-2 border-transparent hover:border-gray-400 hover:bg-gray-500 transition-colors duration-300;
 }
-
-.subtext {
-    font-style: italic;
-}
