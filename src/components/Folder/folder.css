@@ -1,0 +1,23 @@
+.window {
+    border: 2px solid #000;
+    border-style: solid;
+    border-color: #4B5563;
+    background-color: #64748B;
+    margin-top: 16px;
+    margin-left: 20px;
+    height: 90%;
+    width: 95%;
+    position: absolute;
+}
+
+.topbar {
+    background-color: #4B5563;
+    color: #FFFFFF;
+    padding: 2px;
+    text-align: right;
+    cursor: pointer;
+}
+
+.topbar-buttons {
+    @apply rounded-full flex items-center justify-center text-xs;
+}
