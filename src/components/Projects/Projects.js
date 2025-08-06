@@ -1,12 +1,12 @@
 // Projects.js
 import React from 'react';
+import './projects.css';
 
 function Projects() {
   return (
-    <div className='h-screen bg-[#fdfaf8] text-black p-4'>
-      <h1 className='font-semibold'>Notable Projects</h1>
-        <h2>Soundboard Discord Bot - Personal Project</h2>
-        <h2>Third Party API Integration - QWIKWIRE</h2>
+    <div className='h-auto text-black p-4 space-y-4'>
+      <h2 className='project-text'>Soundboard Discord Bot - Personal Project</h2>
+      <h2 className='project-text'>Third Party API Integration - QWIKWIRE</h2>
     </div>
   );
 }
