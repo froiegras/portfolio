@@ -1,0 +1,11 @@
+.skills-list {
+    @apply flex flex-col h-full space-y-4;
+}
+
+.skills-text {
+    @apply text-base font-bold border-2 border-transparent hover:border-gray-400 hover:bg-gray-500 transition-colors duration-300;
+}
+
+.subtext {
+    font-style: italic;
+}
