@@ -6,7 +6,7 @@ function Folder({ children, title, onClose }) {
   return (
     <div className='window bg-white border-2 border-gray-300 rounded-lg shadow-lg'>
       <div className='topbar bg-gray-100 flex items-center justify-between p-2 border-b border-gray-300 rounded-t-lg'>
-        <div className='text-sm font-medium text-gray-700'>
+        <div className='text-sm font-medium text-black'>
           {title || 'Folder'}
         </div>
         <div className='flex items-center space-x-1'>
