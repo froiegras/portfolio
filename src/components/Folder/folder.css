@@ -15,9 +15,8 @@
     color: #FFFFFF;
     padding: 2px;
     text-align: right;
-    cursor: pointer;
 }
 
 .topbar-buttons {
-    @apply rounded-full flex items-center justify-center text-xs;
+    @apply rounded-full flex items-center justify-center text-xs cursor-pointer;
 }
