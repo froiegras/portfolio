@@ -67,3 +67,11 @@
   .taskbar-date { display: block; }
   .taskbar-clock { font-size: 0.875rem; }
 }
+
+.nav-home-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  display: block;
+  object-fit: contain;
+  fill: currentColor;   /* takes the button's text color */
+}

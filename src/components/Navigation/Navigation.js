@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './navigation.css';
+import { ReactComponent as HomeIcon } from '../assets/home.svg';
 
 function Navigation({ onNavItemClick, current }) {
   const [now, setNow] = React.useState(new Date());
@@ -22,13 +23,18 @@ function Navigation({ onNavItemClick, current }) {
 
   return (
     <nav className="taskbar">
-      <button className={`${cls('home')} nav-home`} onClick={() => onNavItemClick('home')}>
-        Home
+      <button className={`${cls('home')} nav-home`} onClick={() => onNavItemClick('home')} aria-label="Home">
+        <HomeIcon className="nav-home-icon" />
       </button>
 
       <div className="taskbar-items">
         {items.map(({ key, label }) => (
-          <button key={key} className={cls(key)} onClick={() => onNavItemClick(key)}>
+          <button
+            key={key}
+            data-nav-key={key}
+            className={cls(key)}
+            onClick={() => onNavItemClick(key)}
+          >
             {label}
           </button>
         ))}
