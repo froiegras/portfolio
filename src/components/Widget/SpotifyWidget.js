@@ -1,6 +1,7 @@
 // components/Widgets/SpotifyWidget.js
-import React, { useState, useEffect } from 'react';
-import Widget from './Widget';
+import { useState, useEffect } from 'react';
+import Widget from '../Widget/Widget';
+import './SpotifyWidget.css';
 
 export default function SpotifyWidget() {
   const [track, setTrack] = useState(null);
@@ -15,22 +16,32 @@ export default function SpotifyWidget() {
       }
     };
     load();
-    const id = setInterval(load, 30000); // poll every 30s
+    const id = setInterval(load, 30000);
     return () => clearInterval(id);
   }, []);
 
   return (
-    <Widget title="Spotify">
+    <Widget title="🎵 Now Playing">
       {track?.isPlaying ? (
-        <div className="flex gap-3 items-center">
-          <img src={track.albumImage} alt="" className="w-14 h-14 rounded" />
-          <div>
-            <a href={track.url} className="font-semibold block">{track.title}</a>
-            <div className="text-sm text-gray-600">{track.artist}</div>
+        <div className="spotify-row">
+          <img src={track.albumImage} alt="" className="spotify-art" />
+          <div className="spotify-info">
+            <a
+              href={track.url}
+              target="_blank"
+              rel="noreferrer"
+              className="spotify-track"
+            >
+              {track.title}
+            </a>
+            <div className="spotify-artist">{track.artist}</div>
+          </div>
+          <div className="spotify-bars" aria-hidden="true">
+            <span /><span /><span />
           </div>
         </div>
       ) : (
-        <div className="text-sm text-gray-500">Not playing anything right now</div>
+        <div className="spotify-idle">Not playing anything right now</div>
       )}
     </Widget>
   );
