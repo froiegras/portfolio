@@ -1,0 +1,89 @@
+.interests-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.interest-item {
+  border: 1px solid transparent;
+  border-radius: 0.375rem;
+  transition: border-color 0.2s, background 0.2s;
+}
+.interest-item:hover { border-color: rgb(var(--c-line)); }
+.interest-item.open {
+  background: rgb(var(--c-surface-2) / 0.5);
+  border-color: rgb(var(--c-line));
+}
+
+.interest-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  min-height: 44px;
+  padding: 0.25rem 0.75rem;
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+
+.interest-chevron {
+  display: inline-block;
+  font-size: 0.75rem;
+  color: rgb(var(--c-muted));
+  transition: transform 0.2s;
+}
+.interest-item.open .interest-chevron { transform: rotate(90deg); }
+
+/* smooth expand / collapse */
+.interest-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;               /* keeps hidden links out of tab order */
+  transition: grid-template-rows 0.25s ease, visibility 0.25s;
+}
+.interest-item.open .interest-panel {
+  grid-template-rows: 1fr;
+  visibility: visible;
+}
+.interest-panel-inner {
+  overflow: hidden;
+  min-height: 0;
+  padding: 0 0.75rem 0 2.75rem;
+}
+.interest-item.open .interest-panel-inner { padding-bottom: 0.75rem; }
+
+.subtext { font-style: italic; color: rgb(var(--c-muted)); margin: 0 0 0.5rem; }
+
+/* directory-style list */
+.interest-tree {
+  list-style: none;
+  margin: 0 0 0.5rem;
+  padding: 0;
+  font-family: monospace;
+  font-size: 0.875rem;
+}
+.interest-tree li::before {
+  content: '├─ ';
+  color: rgb(var(--c-line));
+}
+.interest-tree li:last-child::before { content: '└─ '; }
+.interest-note { color: rgb(var(--c-muted)); font-size: 0.75rem; }
+
+.interest-link {
+  background: none;
+  border: none;
+  padding: 0;
+  color: rgb(var(--c-accent));
+  font: inherit;
+  cursor: pointer;
+}
+.interest-link:hover { text-decoration: underline; }
+
+@media (prefers-reduced-motion: reduce) {
+  .interest-panel, .interest-chevron { transition: none; }
+}

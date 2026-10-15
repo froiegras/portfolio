@@ -2,25 +2,16 @@
 import React, { useState } from 'react';
 import Folder from './components/Folder/Folder';
 import Navigation from './components/Navigation/Navigation';
-import Education from './components/Education/Education';
-import Skills from './components/Skills/Skills';
-import Work from './components/Work/Work';
-import Projects from './components/Projects/Projects';
-import Interests from './components/Interests/Interests';
+import Skills from './components/Pages/Skills/Skills';
+import Work from './components/Pages/Work/Work';
+import Projects from './components/Pages/Projects/Projects';
+import Interests from './components/Pages/Interests/Interests';
 import SpotifyWidget from './components/Widget/SpotifyWidget';
 import DesktopIcon from './components/DesktopIcon/DesktopIcon';
 import './home.css';
 
 function Home() {
   const [selectedComponent, setSelectedComponent] = useState('home');
-
-  const pageMap = {
-    'interests': { component: <Interests />, title: 'My Interests' },
-    'skills': { component: <Skills />, title: 'Skills & Abilities' },
-    'education': { component: <Education />, title: 'Educational Background' },
-    'work': { component: <Work />, title: 'Work Experience' },
-    'projects': { component: <Projects />, title: 'Notable Projects' }
-  };
 
   const handleNavItemClick = (componentName) => {
     setSelectedComponent(componentName);
@@ -30,12 +21,18 @@ function Home() {
     setSelectedComponent('home');
   };
 
+  const pageMap = {
+    'interests': { component: <Interests onNavigate={handleNavItemClick} />, title: 'My Interests' },
+    'skills': { component: <Skills />, title: 'Skills & Abilities' },
+    'work': { component: <Work />, title: 'Work Experience' },
+    'projects': { component: <Projects />, title: 'Projects' },
+  };
+
   const renderContent = () => {
     if (selectedComponent === 'home') {
       return (
         <div className='home-content p-8'>
-          <h1 className='text-3xl font-bold mb-4'>Welcome to My Portfolio</h1>
-          <p>Select a section from the navigation below to learn more about me.</p>
+          <h1 className='text-3xl font-bold mb-4'>Hi, issa me Froi</h1>
 
           <div className="icon-grid mb-8">
             {Object.entries(pageMap).map(([key, { title }]) => (

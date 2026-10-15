@@ -14,9 +14,8 @@ function Navigation({ onNavItemClick, current }) {
   const items = [
     { key: 'interests', label: 'Interests' },
     { key: 'skills', label: 'Skills' },
-    { key: 'education', label: 'Education' },
     { key: 'work', label: 'Work Experience' },
-    { key: 'projects', label: 'Notable Projects' },
+    { key: 'projects', label: 'Projects' },
   ];
 
   const cls = (key) => `nav-button${current === key ? ' active' : ''}`;
