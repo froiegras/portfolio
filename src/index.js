@@ -1,7 +1,7 @@
 // index.js
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './styles/tailwind.css'; // Import Tailwind CSS styles
+import './index.css'; // Import Tailwind CSS styles
 import Home from './Home';
 
 ReactDOM.render(

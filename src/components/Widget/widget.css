@@ -1,0 +1,17 @@
+.widget {
+  background: rgb(var(--c-surface) / 0.8);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgb(var(--c-line));
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3);
+  overflow: hidden;
+}
+.widget-title {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgb(var(--c-muted));
+  background: rgb(var(--c-surface-2));
+  border-bottom: 1px solid rgb(var(--c-line));
+}
+.widget-body { padding: 0.75rem; }

@@ -1,22 +1,68 @@
 .window {
-    border: 2px solid #000;
-    border-style: solid;
-    border-color: #4B5563;
-    background-color: #64748B;
-    margin-top: 16px;
-    margin-left: 20px;
-    height: 90%;
-    width: 95%;
-    position: absolute;
+  display: flex;
+  flex-direction: column;
+  background: rgb(var(--c-surface));
+  border: 1px solid rgb(var(--c-line));
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.4);
+  overflow: hidden;
+  margin: 2px;
+  /* mobile: full-screen sheet above the taskbar */
+  position: fixed;
+  inset: 0 0 var(--taskbar-h) 0;
+  z-index: 40;
 }
 
-.topbar {
-    background-color: #4B5563;
-    color: #FFFFFF;
-    padding: 2px;
-    text-align: right;
+.window-titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  background: rgb(var(--c-surface-2));
+  border-bottom: 1px solid rgb(var(--c-line));
+  user-select: none;
 }
+
+.window-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.window-controls { display: flex; align-items: center; gap: 0.5rem; }
+
+.window-body { flex: 1; overflow-y: auto; padding: 1rem; }
 
 .topbar-buttons {
-    @apply rounded-full flex items-center justify-center text-xs cursor-pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  border: 1px solid rgb(var(--c-line));
+  background: rgb(var(--c-surface));
+  color: rgb(var(--c-muted));
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s;
+}
+.topbar-buttons { color: rgb(var(--c-fg)); }
+.topbar-buttons.minimize { background: rgb(234 179 8 / 0.8); }
+.topbar-buttons.maximize { background: rgb(34 197 94 / 0.8); }
+.topbar-buttons.close    { background: rgb(239 68 68 / 0.8); }
+
+@media (min-width: 768px) {
+  .window {
+    position: relative;
+    inset: auto;
+    height: calc(100vh - var(--taskbar-h) - 3rem);
+    height: calc(100dvh - var(--taskbar-h) - 3rem);
+    border-radius: 0.75rem;
+  }
+  .window-body { padding: 1.5rem; }
+  .topbar-buttons { width: 1.5rem; height: 1.5rem; }
 }

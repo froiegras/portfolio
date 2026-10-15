@@ -1,13 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --c-desktop: 15 17 26;
+  --c-surface: 24 27 40;
+  --c-surface-2: 34 38 56;
+  --c-line: 58 64 90;
+  --c-fg: 230 233 245;
+  --c-muted: 148 155 180;
+  --c-accent: 124 140 255;
+  --taskbar-h: 56px;
+}
+
+html, body, #root { min-height: 100%; }
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(var(--c-desktop));
+  color: rgb(var(--c-fg));
+  background-attachment: fixed;
 }
 
-code {
-  font-family: "Work Sans", "Inter", Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
+code { font-family: "Work Sans", "Inter", Menlo, Monaco, Consolas, 'Courier New', monospace; }
+
+a { color: rgb(var(--c-accent)); }
+::selection { background: rgb(var(--c-accent) / 0.35); }
+:focus-visible { outline: 2px solid rgb(var(--c-accent)); outline-offset: 2px; }
+* { scrollbar-width: thin; scrollbar-color: rgb(var(--c-line)) transparent; }

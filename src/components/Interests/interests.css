@@ -1,11 +1,13 @@
-.interests-list {
-    @apply flex flex-col h-full space-y-4;
-}
+.interests-list { display: flex; flex-direction: column; height: 100%; gap: 0.5rem; }
 
 .interests-text {
-    @apply text-base font-bold border-2 border-transparent hover:border-gray-400 hover:bg-gray-500 transition-colors duration-300;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid transparent;
+  transition: background 0.2s, border-color 0.2s;
 }
+.interests-text:hover { background: rgb(var(--c-surface-2)); border-color: rgb(var(--c-line)); }
 
-.subtext {
-    font-style: italic;
-}
+.subtext { font-style: italic; color: rgb(var(--c-muted)); }
