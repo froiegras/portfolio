@@ -17,6 +17,8 @@
   text-align: center;
   cursor: pointer;
   user-select: none;
+  position: relative;
+  touch-action: none;
 }
 .desktop-icon:hover { background: rgb(255 255 255 / 0.1); border-color: rgb(255 255 255 / 0.1); }
 .desktop-icon-img { font-size: 2.25rem; }
@@ -26,4 +28,14 @@
 
 @media (min-width: 768px) {
   .app-main { padding: 1.5rem 1.5rem calc(var(--taskbar-h) + 1.5rem); }
+}
+
+.home-content {
+  position: relative;
+  min-height: calc(100vh - var(--taskbar-h) - 3rem);
+  min-height: calc(100dvh - var(--taskbar-h) - 3rem);
+}
+
+@media (min-width: 768px) {
+  .desktop-icon { touch-action: none; }   /* only block touch scrolling when dragging is on */
 }

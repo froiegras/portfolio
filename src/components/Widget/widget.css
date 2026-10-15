@@ -5,6 +5,7 @@
   border-radius: 0.5rem;
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3);
   overflow: hidden;
+  position: relative;
 }
 .widget-title {
   padding: 0.25rem 0.75rem;
@@ -13,5 +14,15 @@
   color: rgb(var(--c-muted));
   background: rgb(var(--c-surface-2));
   border-bottom: 1px solid rgb(var(--c-line));
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
 }
 .widget-body { padding: 0.75rem; }
+
+.react-draggable-dragging { z-index: 10; }
+.react-draggable-dragging .widget-title { cursor: grabbing; }
+
+@media (min-width: 768px) {
+  .widget-title { cursor: grab; touch-action: none; user-select: none; }
+}

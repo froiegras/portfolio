@@ -8,6 +8,7 @@ import Work from './components/Work/Work';
 import Projects from './components/Projects/Projects';
 import Interests from './components/Interests/Interests';
 import SpotifyWidget from './components/Widget/SpotifyWidget';
+import DesktopIcon from './components/DesktopIcon/DesktopIcon';
 import './home.css';
 
 function Home() {
@@ -38,10 +39,7 @@ function Home() {
 
           <div className="icon-grid mb-8">
             {Object.entries(pageMap).map(([key, { title }]) => (
-              <button key={key} className="desktop-icon" onClick={() => setSelectedComponent(key)}>
-                <span className="desktop-icon-img">📁</span>
-                <span>{title}</span>
-              </button>
+              <DesktopIcon key={key} label={title} onOpen={() => setSelectedComponent(key)} />
             ))}
           </div>
 
