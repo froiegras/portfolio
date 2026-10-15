@@ -26,3 +26,12 @@
 @media (min-width: 768px) {
   .widget-title { cursor: grab; touch-action: none; user-select: none; }
 }
+
+@media (min-width: 768px) {
+  .widget.widget-top-right {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 20rem;
+  }
+}

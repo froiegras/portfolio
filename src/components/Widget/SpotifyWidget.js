@@ -21,7 +21,7 @@ export default function SpotifyWidget() {
   }, []);
 
   return (
-    <Widget title="🎵 Now Playing">
+    <Widget title="🎵 Now Playing" className="widget-top-right">
       {track?.isPlaying ? (
         <div className="spotify-row">
           <img src={track.albumImage} alt="" className="spotify-art" />
