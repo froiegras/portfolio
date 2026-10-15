@@ -50,7 +50,12 @@ function Home() {
     const selectedItem = pageMap[selectedComponent];
     if (selectedItem) {
       return (
-        <Folder title={selectedItem.title} onClose={handleCloseFolder}>
+        <Folder
+          key={selectedComponent}
+          originKey={selectedComponent}
+          title={selectedItem.title}
+          onClose={handleCloseFolder}
+        >
           {selectedItem.component}
         </Folder>
       );
