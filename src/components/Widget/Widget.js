@@ -2,7 +2,7 @@
 import { useRef } from 'react';
 import Draggable from 'react-draggable';
 import useIsDesktop from '../../hooks/useIsDesktop';
-import './widget.css';
+import './Widget.css';
 
 export default function Widget({ title, children, className = '' }) {
   const nodeRef = useRef(null);

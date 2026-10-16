@@ -8,7 +8,7 @@ import Projects from './components/Pages/Projects/Projects';
 import Interests from './components/Pages/Interests/Interests';
 import SpotifyWidget from './components/Widget/SpotifyWidget';
 import DesktopIcon from './components/DesktopIcon/DesktopIcon';
-import './home.css';
+import './Home.css';
 
 function Home() {
   const [selectedComponent, setSelectedComponent] = useState('home');

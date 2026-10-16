@@ -1,6 +1,9 @@
 // Interests.js
 import { useState } from 'react';
-import './interests.css';
+import './Interests.css';
+import Gallery from '../../Gallery/Gallery';
+
+const P = process.env.PUBLIC_URL + '/assets/gallery';
 
 const interests = [
   {
@@ -56,6 +59,18 @@ const interests = [
       { label: 'Mt. Example', note: '2025' }, // placeholders
       { label: 'Another Trail', note: '2026' },
     ],
+    photos: [
+      { src: `${P}/hiking/mt-example.webp`, alt: 'View from the summit of Mt. Example', caption: 'Mt. Example, 2025' },
+      { src: `${P}/hiking/trail-2.webp`, alt: 'Forest trail in the morning', caption: 'Another Trail, 2026' },
+      { src: `${P}/hiking/mt-example.webp`, alt: 'Summit view', caption: 'Mt. Example, 2025' },
+      {
+        type: 'video',
+        src: `${P}/hiking/ridge-walk.mp4`,
+        poster: `${P}/hiking/ridge-walk-poster.webp`,
+        alt: 'Walking along a ridge at sunrise',
+        caption: 'Ridge walk',
+      },
+    ],
   },
 ];
 
@@ -66,7 +81,7 @@ function Interests({ onNavigate }) {
 
   return (
     <div className="interests-list">
-      {interests.map(({ id, icon, name, summary, items, link }) => {
+      {interests.map(({ id, icon, name, summary, items, link, photos }) => {
         const isOpen = openId === id;
         return (
           <div key={id} className={`interest-item${isOpen ? ' open' : ''}`}>
@@ -94,6 +109,9 @@ function Interests({ onNavigate }) {
                     ))}
                   </ul>
                 )}
+
+                {photos && <Gallery photos={photos} />}
+
                 {link && (
                   <button className="interest-link" onClick={() => onNavigate(link.page)}>
                     {link.text} →

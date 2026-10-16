@@ -1,5 +1,5 @@
-import React, { useRef, useLayoutEffect } from 'react';
-import './folder.css';
+import { useRef, useLayoutEffect } from 'react';
+import './Folder.css';
 
 const reduceMotion = () =>
   window.matchMedia('(prefers-reduced-motion: reduce)').matches;

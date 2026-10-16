@@ -1,5 +1,5 @@
 // Projects.js
-import './projects.css';
+import './Projects.css';
 
 const projects = [
   {

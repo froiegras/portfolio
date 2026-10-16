@@ -1,5 +1,5 @@
 // Work.js
-import './work.css';
+import './Work.css';
 
 const jobs = [
   {

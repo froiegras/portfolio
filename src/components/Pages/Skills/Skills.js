@@ -1,6 +1,6 @@
 // Skills.js
 import React, { useState } from 'react';
-import './skills.css';
+import './Skills.css';
 
 const skills = [
   { name: 'Python', icon: '🐍', type: 'Language', level: 4 },

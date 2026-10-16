@@ -1,8 +1,8 @@
 // Navigation.js
 import React from 'react';
 import PropTypes from 'prop-types';
-import './navigation.css';
-import { ReactComponent as HomeIcon } from '../assets/home.svg';
+import './Navigation.css';
+import { ReactComponent as HomeIcon } from '../../assets/home.svg';
 
 function Navigation({ onNavItemClick, current }) {
   const [now, setNow] = React.useState(new Date());
