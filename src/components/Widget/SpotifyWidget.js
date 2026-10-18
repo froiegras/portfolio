@@ -1,30 +1,39 @@
 // components/Widgets/SpotifyWidget.js
 import { useState, useEffect } from 'react';
 import Widget from '../Widget/Widget';
+import { getNowPlaying } from '../../api/spotify';
 import './SpotifyWidget.css';
 
-export default function SpotifyWidget() {
+export default function SpotifyWidget({ className = '' }) {
   const [track, setTrack] = useState(null);
 
   useEffect(() => {
+    const controller = new AbortController();
+
     const load = async () => {
+      if (document.hidden) return;              // skip polling in background tabs
       try {
-        const res = await fetch('/api/now-playing');
-        setTrack(await res.json());
-      } catch {
-        setTrack(null);
+        setTrack(await getNowPlaying(controller.signal));
+      } catch (e) {
+        if (e.name !== 'AbortError') setTrack(null);
       }
     };
+
     load();
-    const id = setInterval(load, 30000);
-    return () => clearInterval(id);
+    const id = setInterval(load, 15000);
+    return () => {
+      controller.abort();
+      clearInterval(id);
+    };
   }, []);
 
   return (
-    <Widget title="🎵 Now Playing" className="widget-top-right">
+    <Widget title="🎵 Now Playing" className={className}>
       {track?.isPlaying ? (
         <div className="spotify-row">
-          <img src={track.albumImage} alt="" className="spotify-art" />
+          {track.albumImage && (
+            <img src={track.albumImage} alt="" className="spotify-art" />
+          )}
           <div className="spotify-info">
             <a
               href={track.url}
