@@ -4,30 +4,64 @@ import './Work.css';
 const jobs = [
   {
     id: 'job-1',
-    role: 'Software Developer',            // placeholder
-    company: 'Company Name',               // placeholder
-    type: 'Full-time',
-    start: 'Jun 2024',
-    end: 'Present',
-    location: 'Manila, PH',
-    summary: 'One line on what your team does and your part in it.',
+    role: 'Software Developer Intern',
+    company: 'JuanTax',
+    type: 'Internship',
+    start: 'Sept. 2021',
+    end: 'Nov. 2021',
+    location: 'Remote',
+    summary: 'JuanTax is a tax compliance platform that helps businesses and individuals file their taxes in the Philippines. I worked as a Software Developer Intern, where I was assigned to the upcoming dashboard project using ReactJS. My responsibilities include adding new features to the navigation and forms of the web pages.',
     bullets: [
-      'Integrated a third-party API, handling auth, rate limits and caching',
-      'Built and maintained features in a ReactJS + PostgreSQL codebase',
+      'Assigned to upcoming dashboard project using ReactJS',
+      'Add new features to the navigation and forms to the web pages',
+      'Apply encapsulation and modularity principles to the codebase',
     ],
-    tech: ['ReactJS', 'PostgreSQL', 'Redis'],
+    tech: ['ReactJS'],
   },
   {
     id: 'job-2',
-    role: 'Intern',
-    company: 'Another Company',
-    type: 'Internship',
-    start: 'Jan 2024',
-    end: 'May 2024',
+    role: 'Software Developer',
+    company: 'Qwikwire',
+    type: 'Full-time',
+    start: 'Aug. 2023',
+    end: 'Dec. 2023',
+    location: 'Hybrid, Makati City, Philippines',
+    summary: 'Assisted on payment status updates.',
+    bullets: [
+      'Assisted on Portals and Dashboard status updates',
+    ],
+    tech: ['Python', 'Angular JS', 'PostgreSQL'],
+  },
+  {
+    id: 'job-3',
+    role: 'Software Developer',
+    company: 'Qwikwire',
+    type: 'Full-time',
+    start: 'Mar. 2024',
+    end: 'Oct. 2025',
+    location: 'Hybrid, Makati City, Philippines',
+    summary: 'Assisted on multiple projects and initiatives.',
+    bullets: [
+      'Refactored Aqwire Personal design to improve mobile user experience',
+      'Integrated multiple payment gateways to the Portals platform',
+      'Assisted on data cleanup and reduce redundancy on the database',
+      'Collaborated with Compliance team to automate the process of reporting suspicious transactions to BSP and AMLA'
+    ],
+    tech: ['NextJS', 'TailwindCSS', 'PostgreSQL', 'Python', 'Angular JS', 'Redis', 'Docker', 'ssh', 'Git', 'Golang', 'Github Actions'],
+  },
+  {
+    id: 'job-4',
+    role: 'Software Developer',
+    company: 'Rivvy',
+    type: 'Full-time',
+    start: 'Oct. 2025',
+    end: 'Present',
     location: 'Remote',
-    summary: 'What you worked on.',
-    bullets: ['Something you shipped or improved'],
-    tech: ['Python'],
+    summary: 'Automating settlements and reports for Rivvy\'s internal operations.',
+    bullets: [
+      'Automated settlements and email reports for Rivvy\'s internal operations'
+    ],
+    tech: ['Python', 'Golang', 'PostgreSQL', 'Redis', 'ssh', 'Git'],
   },
 ];
 
