@@ -3,6 +3,8 @@ import asyncio, os, time
 import httpx
 from dotenv import load_dotenv
 from fastapi import FastAPI
+from steam import router as steam_router
+
 
 load_dotenv()
 CID = os.environ["SPOTIFY_CLIENT_ID"]
@@ -10,6 +12,7 @@ SECRET = os.environ["SPOTIFY_CLIENT_SECRET"]
 REFRESH = os.environ["SPOTIFY_REFRESH_TOKEN"]
 
 app = FastAPI(docs_url=None, redoc_url=None)   # hide the auto docs page
+app.include_router(steam_router)
 http = httpx.AsyncClient(timeout=10)
 
 _token = {"value": None, "exp": 0.0}

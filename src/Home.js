@@ -8,6 +8,7 @@ import Projects from './components/Pages/Projects/Projects';
 import Interests from './components/Pages/Interests/Interests';
 import SpotifyWidget from './components/Widget/SpotifyWidget';
 import DesktopIcon from './components/DesktopIcon/DesktopIcon';
+import SteamWidget from './components/Widget/SteamWidget';
 import './Home.css';
 
 function Home() {
@@ -42,6 +43,7 @@ function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
             <SpotifyWidget />
+            <SteamWidget />
           </div>
         </div>
       );
