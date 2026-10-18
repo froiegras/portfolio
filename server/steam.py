@@ -1,20 +1,18 @@
 # server/steam.py
-import asyncio, os, time
+import asyncio
+
 import httpx
-from dotenv import load_dotenv
 from fastapi import APIRouter
 
-load_dotenv()
-KEY = os.environ["STEAM_API_KEY"]
-STEAM_ID = os.environ["STEAM_ID"]
+from common import CachedValue, env
 
-router = APIRouter()
+KEY = env("STEAM_API_KEY")
+STEAM_ID = env("STEAM_ID")
+
+router = APIRouter(prefix="/api/steam")
 http = httpx.AsyncClient(timeout=10, base_url="https://api.steampowered.com")
 
 EMPTY = {"found": False}
-_cache = {"data": EMPTY, "exp": 0.0}
-_lock = asyncio.Lock()
-
 
 async def owned_games() -> list:
     r = await http.get(
@@ -71,11 +69,9 @@ async def fetch_last_played() -> tuple[dict, int]:
         "inGame": me.get("gameextrainfo"),                  # None unless playing now
     }, (60 if current_id else 300)
 
+last_played_cache = CachedValue(fetch_last_played, EMPTY)
 
-@router.get("/api/steam/last-played")
+
+@router.get("/last-played")
 async def last_played():
-    async with _lock:
-        if time.time() >= _cache["exp"]:
-            data, ttl = await fetch_last_played()
-            _cache.update(data=data, exp=time.time() + ttl)
-        return _cache["data"]
+    return await last_played_cache.get()
