@@ -32,7 +32,7 @@ function Home() {
   const renderContent = () => {
     if (selectedComponent === 'home') {
     return (
-      <div className="home-content p-8">
+      <div className="home-content p-2">
         <div className="home-main">
           <h1 className="text-3xl font-bold mb-2">Welcome to My Portfolio</h1>
           <p className="mb-6">Select a section from the navigation to learn more about me.</p>
