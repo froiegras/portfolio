@@ -54,6 +54,15 @@
 .project-links {
   display: flex;
   gap: 1rem;
-  margin-top: auto;      /* pushes links to the bottom of the card */
+  margin-top: auto;
   font-size: 0.875rem;
+}
+
+.projects-subhead {
+  margin: 1.5rem 0 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgb(var(--c-muted));
 }

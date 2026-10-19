@@ -1,5 +1,6 @@
 // Projects.js
 import './Projects.css';
+import GithubRepos from './GithubRepos';
 
 const projects = [
   {
@@ -34,44 +35,47 @@ const projects = [
 
 function Projects() {
   return (
-    <div className="projects-grid">
-      {projects.map(({ id, icon, name, kind, summary, highlights, tech, links }) => {
-        const shownLinks = links.filter((l) => l.href);
-        return (
-          <article key={id} className="project-card">
-            <header className="project-head">
-              <span className="project-icon" aria-hidden="true">{icon}</span>
-              <div>
-                <h2 className="project-text">{name}</h2>
-                <span className="project-kind">{kind}</span>
-              </div>
-            </header>
+    <>
+      <div className="projects-grid">
+        {projects.map(({ id, icon, name, kind, summary, highlights, tech, links }) => {
+          const shownLinks = links.filter((l) => l.href);
+          return (
+            <article key={id} className="project-card">
+              <header className="project-head">
+                <span className="project-icon" aria-hidden="true">{icon}</span>
+                <div>
+                  <h2 className="project-text">{name}</h2>
+                  <span className="project-kind">{kind}</span>
+                </div>
+              </header>
 
-            <p className="project-summary">{summary}</p>
+              <p className="project-summary">{summary}</p>
 
-            {highlights.length > 0 && (
-              <ul className="project-highlights">
-                {highlights.map((h) => <li key={h}>{h}</li>)}
+              {highlights.length > 0 && (
+                <ul className="project-highlights">
+                  {highlights.map((h) => <li key={h}>{h}</li>)}
+                </ul>
+              )}
+
+              <ul className="project-tags">
+                {tech.map((t) => <li key={t}>{t}</li>)}
               </ul>
-            )}
 
-            <ul className="project-tags">
-              {tech.map((t) => <li key={t}>{t}</li>)}
-            </ul>
-
-            {shownLinks.length > 0 && (
-              <div className="project-links">
-                {shownLinks.map(({ label, href }) => (
-                  <a key={label} href={href} target="_blank" rel="noreferrer">
-                    {label} ↗
-                  </a>
-                ))}
-              </div>
-            )}
-          </article>
-        );
-      })}
-    </div>
+              {shownLinks.length > 0 && (
+                <div className="project-links">
+                  {shownLinks.map(({ label, href }) => (
+                    <a key={label} href={href} target="_blank" rel="noreferrer">
+                      {label} ↗
+                    </a>
+                  ))}
+                </div>
+              )}
+            </article>
+          );
+        })}
+      </div>
+      <GithubRepos />
+    </>
   );
 }
 

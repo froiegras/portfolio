@@ -4,6 +4,7 @@ import './Interests.css';
 import SteamTopGames from './SteamTopGames';
 // import Gallery from '../../Gallery/Gallery';
 import SpotifyTopTracks from './SpotifyTopTracks';
+import GithubRepoList from './GithubRepoList';
 
 const P = process.env.PUBLIC_URL + '/assets/gallery';
 
@@ -19,6 +20,7 @@ const interests = [
       { label: 'File renamer' },
       { label: 'Spotify → YouTube Music playlist importer' },
     ],
+    github: true,
     link: { text: 'See my projects', page: 'projects' },
   },
   {
@@ -87,7 +89,7 @@ function Interests({ onNavigate }) {
 
   return (
     <div className="interests-list">
-      {interests.map(({ id, icon, name, summary, items, link, photos, steam, spotify }) => {
+      {interests.map(({ id, icon, name, summary, items, link, photos, steam, spotify, github }) => {
         const isOpen = openId === id;
         return (
           <div key={id} className={`interest-item${isOpen ? ' open' : ''}`}>
@@ -116,7 +118,11 @@ function Interests({ onNavigate }) {
                   />
                 ))}
 
-                {!steam && !spotify && items && (
+                {github && (
+                  <GithubRepoList caption="Recently active repos on my GitHub" fallback={items} />
+                )}
+
+                {!steam && !spotify && !github && items && (
                   <ul className="interest-tree">
                     {items.map(({ label, note }) => (
                       <li key={label}>
