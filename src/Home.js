@@ -1,5 +1,5 @@
 // App.js
-import React, { useState } from 'react';
+import React, { useState, useCallback  } from 'react';
 import Folder from './components/Folder/Folder';
 import Navigation from './components/Navigation/Navigation';
 import Skills from './components/Pages/Skills/Skills';
@@ -9,10 +9,30 @@ import Interests from './components/Pages/Interests/Interests';
 import SpotifyWidget from './components/Widget/SpotifyWidget';
 import DesktopIcon from './components/DesktopIcon/DesktopIcon';
 import SteamWidget from './components/Widget/SteamWidget';
+import BootScreen from './components/BootScreen/BootScreen';
 import './Home.css';
+
+function shouldBoot() {
+  try {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
+    return sessionStorage.getItem('booted') !== '1';
+  } catch {
+    return true;
+  }
+}
 
 function Home() {
   const [selectedComponent, setSelectedComponent] = useState('home');
+  const [booting, setBooting] = useState(shouldBoot);
+
+  const handleBootDone = useCallback(() => {
+  try {
+    sessionStorage.setItem('booted', '1');
+  } catch {
+    // ignore: it will just play again next time
+  }
+  setBooting(false);
+}, []);
 
   const handleNavItemClick = (componentName) => {
     setSelectedComponent(componentName);
@@ -69,10 +89,13 @@ function Home() {
   };
 
   return (
-    <div className="app-shell">
-      <main className="app-main">{renderContent()}</main>
-      <Navigation onNavItemClick={handleNavItemClick} current={selectedComponent} />
-    </div>
+    <>
+      {booting && <BootScreen onDone={handleBootDone} />}
+      <div className="app-shell">
+        <main className="app-main">{renderContent()}</main>
+        <Navigation onNavItemClick={handleNavItemClick} current={selectedComponent} />
+      </div>
+    </>
   );
 }
 

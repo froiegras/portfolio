@@ -1,0 +1,63 @@
+/* components/BootScreen/BootScreen.css */
+.boot {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background: rgb(var(--c-desktop));
+  color: rgb(var(--c-fg));
+  font-family: monospace;
+  transition: opacity 0.5s ease;
+}
+.boot.leaving { opacity: 0; pointer-events: none; }
+
+.boot-inner { width: min(90vw, 28rem); }
+
+.boot-logo {
+  margin-bottom: 1.5rem;
+  font-size: 3rem;
+  text-align: center;
+  animation: boot-pulse 1.4s ease-in-out infinite;
+}
+
+.boot-log {
+  list-style: none;
+  margin: 0 0 1.25rem;
+  padding: 0;
+  min-height: 9rem;
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+.boot-log li::before { content: '> '; color: rgb(var(--c-muted)); }
+.boot-ok { color: rgb(34 197 94); }
+
+.boot-bar {
+  height: 4px;
+  overflow: hidden;
+  border-radius: 9999px;
+  background: rgb(var(--c-line));
+}
+.boot-bar span {
+  display: block;
+  height: 100%;
+  background: rgb(var(--c-accent));
+  transition: width 0.3s ease;
+}
+
+.boot-skip {
+  margin: 1rem 0 0;
+  text-align: center;
+  font-size: 0.75rem;
+  color: rgb(var(--c-muted));
+}
+
+@keyframes boot-pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50%      { opacity: 1;   transform: scale(1.06); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .boot, .boot-bar span { transition: none; }
+  .boot-logo { animation: none; }
+}
