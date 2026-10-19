@@ -1,7 +1,9 @@
 // Interests.js
 import { useState } from 'react';
 import './Interests.css';
-import Gallery from '../../Gallery/Gallery';
+import SteamTopGames from './SteamTopGames';
+// import Gallery from '../../Gallery/Gallery';
+import SpotifyTopTracks from './SpotifyTopTracks';
 
 const P = process.env.PUBLIC_URL + '/assets/gallery';
 
@@ -23,22 +25,26 @@ const interests = [
     id: 'kpop',
     icon: '🎬',
     name: 'Kpop.mp4',
-    summary: 'I listen to anything especially TWICE.',
+    summary: 'I like music especially TWICE.',
     items: [
-      { label: 'Favorite album', note: 'placeholder' },
-      { label: 'Favorite song', note: 'placeholder' },
+      { label: 'TWICE', note: 'my favorite group' },     // fallback if Spotify returns nothing
+    ],
+    spotify: [
+      { key: 'twice', caption: 'Most played TWICE songs (past year)' },
+      { key: 'kpop', caption: 'Most played K-pop overall (past year)' },
     ],
   },
   {
     id: 'games',
     icon: '🎮',
     name: 'Video Games.exe',
-    summary: 'Mostly co-op and action games.',
+    summary: 'I like video games',
     items: [
       { label: 'Monster Hunter World / Wilds' },
       { label: 'Apex Legends' },
       { label: 'Euro Truck Simulator 2' },
     ],
+    steam: true,
   },
   {
     id: 'sports',
@@ -56,7 +62,7 @@ const interests = [
     name: 'Hiking.png',
     summary: 'Picked this up quite recently.',
     items: [
-      { label: 'Mt. Example', note: '2025' }, // placeholders
+      { label: 'Mt. Example', note: '2025' },
       { label: 'Another Trail', note: '2026' },
     ],
     photos: [
@@ -81,7 +87,7 @@ function Interests({ onNavigate }) {
 
   return (
     <div className="interests-list">
-      {interests.map(({ id, icon, name, summary, items, link, photos }) => {
+      {interests.map(({ id, icon, name, summary, items, link, photos, steam, spotify }) => {
         const isOpen = openId === id;
         return (
           <div key={id} className={`interest-item${isOpen ? ' open' : ''}`}>
@@ -99,7 +105,18 @@ function Interests({ onNavigate }) {
             <div id={`panel-${id}`} className="interest-panel">
               <div className="interest-panel-inner">
                 <p className="subtext">{summary}</p>
-                {items && (
+                {steam && <SteamTopGames fallback={items} />}
+
+                {spotify?.map(({ key, caption }, i) => (
+                  <SpotifyTopTracks
+                    key={key}
+                    genreKey={key}
+                    caption={caption}
+                    fallback={i === 0 ? items : []}
+                  />
+                ))}
+
+                {!steam && !spotify && items && (
                   <ul className="interest-tree">
                     {items.map(({ label, note }) => (
                       <li key={label}>
@@ -108,14 +125,6 @@ function Interests({ onNavigate }) {
                       </li>
                     ))}
                   </ul>
-                )}
-
-                {photos && <Gallery photos={photos} />}
-
-                {link && (
-                  <button className="interest-link" onClick={() => onNavigate(link.page)}>
-                    {link.text} →
-                  </button>
                 )}
               </div>
             </div>

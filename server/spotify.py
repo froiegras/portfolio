@@ -1,8 +1,10 @@
 # server/spotify.py
+import asyncio
 import time
+from functools import partial
 
 import httpx
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 
 from common import CachedValue, env
 
@@ -14,8 +16,14 @@ router = APIRouter(prefix="/api/spotify")
 http = httpx.AsyncClient(timeout=10)
 
 IDLE = {"isPlaying": False}
-_token = {"value": None, "exp": 0.0}
+GENRES = {"kpop": "k-pop"}
+TIME_RANGE = "long_term"
+MAX_TRACKS = 10
+ARTISTS = {"twice": "TWICE"}
 
+_token = {"value": None, "exp": 0.0}
+_artist_genres: dict[str, list[str]] = {}
+_limit = asyncio.Semaphore(5)
 
 async def access_token() -> str:
     if _token["value"] and time.time() < _token["exp"] - 30:
@@ -70,3 +78,81 @@ now_playing_cache = CachedValue(fetch_now_playing, IDLE)
 @router.get("/now-playing")
 async def now_playing():
     return await now_playing_cache.get()
+
+# ---- top tracks by genre ---------------------------------------------------
+async def api_get(path: str, **params) -> dict:
+    r = await http.get(
+        f"https://api.spotify.com/v1{path}",
+        params=params,
+        headers={"Authorization": f"Bearer {await access_token()}"},
+    )
+    r.raise_for_status()
+    return r.json()
+
+
+async def genres_of(artist_id: str) -> list[str]:
+    if artist_id not in _artist_genres:
+        async with _limit:
+            _artist_genres[artist_id] = (await api_get(f"/artists/{artist_id}")).get("genres", [])
+    return _artist_genres[artist_id]
+
+
+def to_track(t: dict) -> dict:
+    images = (t.get("album") or {}).get("images") or []
+    return {
+        "id": t["id"],
+        "title": t["name"],
+        "artist": ", ".join(a["name"] for a in t["artists"]),
+        "image": images[-1]["url"] if images else None,
+        "url": t["external_urls"]["spotify"],
+    }
+
+
+async def fetch_top_by_genre(genre: str) -> tuple[dict, int]:
+    try:
+        top = await api_get("/me/top/tracks", time_range=TIME_RANGE, limit=50)
+        tracks = top.get("items", [])
+        ids = {a["id"] for t in tracks for a in t["artists"] if a.get("id")}
+        await asyncio.gather(*(genres_of(i) for i in ids))
+    except httpx.HTTPError as e:
+        print("top-tracks failed:", e)
+        return {"tracks": []}, 600
+
+    def matches(track: dict) -> bool:
+        return any(
+            genre in g.lower()
+            for a in track["artists"]
+            for g in _artist_genres.get(a.get("id"), [])
+        )
+
+    picked = [t for t in tracks if matches(t)][:MAX_TRACKS]
+    return {"tracks": [to_track(t) for t in picked]}, 6 * 3600
+
+
+async def fetch_top_by_artist(name: str) -> tuple[dict, int]:
+    try:
+        top = await api_get("/me/top/tracks", time_range=TIME_RANGE, limit=50)
+    except httpx.HTTPError as e:
+        print("top-tracks failed:", e)
+        return {"tracks": []}, 600
+
+    wanted = name.casefold()
+    picked = [
+        t for t in top.get("items", [])
+        if any(a["name"].casefold() == wanted for a in t["artists"])
+    ][:MAX_TRACKS]
+    return {"tracks": [to_track(t) for t in picked]}, 6 * 3600
+
+top_caches = {
+    **{key: CachedValue(partial(fetch_top_by_genre, text), {"tracks": []})
+       for key, text in GENRES.items()},
+    **{key: CachedValue(partial(fetch_top_by_artist, name), {"tracks": []})
+       for key, name in ARTISTS.items()},
+}
+
+@router.get("/top-tracks/{key}")
+async def top_tracks(key: str):
+    cache = top_caches.get(key)
+    if cache is None:
+        raise HTTPException(status_code=404)
+    return await cache.get()

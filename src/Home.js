@@ -31,23 +31,26 @@ function Home() {
 
   const renderContent = () => {
     if (selectedComponent === 'home') {
-      return (
-        <div className='home-content p-8'>
-          <h1 className='text-3xl font-bold mb-4'>Hi, issa me Froi</h1>
+    return (
+      <div className="home-content p-8">
+        <div className="home-main">
+          <h1 className="text-3xl font-bold mb-2">Welcome to My Portfolio</h1>
+          <p className="mb-6">Select a section from the navigation to learn more about me.</p>
 
           <div className="icon-grid mb-8">
             {Object.entries(pageMap).map(([key, { title }]) => (
               <DesktopIcon key={key} label={title} onOpen={() => setSelectedComponent(key)} />
             ))}
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-            <SpotifyWidget />
-            <SteamWidget />
-          </div>
         </div>
-      );
-    }
+
+        <aside className="widget-dock" aria-label="Widgets">
+          <SpotifyWidget />
+          <SteamWidget />
+        </aside>
+      </div>
+    );
+  }
 
     const selectedItem = pageMap[selectedComponent];
     if (selectedItem) {

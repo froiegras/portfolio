@@ -4,3 +4,9 @@ export async function getNowPlaying(signal) {
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return res.json();
 }
+
+export async function getTopTracks(key, signal) {
+  const res = await fetch(`/api/spotify/top-tracks/${key}`, { signal });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
+}
