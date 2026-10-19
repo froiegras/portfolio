@@ -1,12 +1,12 @@
 .window {
   display: flex;
   flex-direction: column;
-  background: rgb(var(--c-surface));
+  background: rgb(var(--c-surface) / 0.92);
+  backdrop-filter: blur(12px);
   border: 1px solid rgb(var(--c-line));
   box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.4);
   overflow: hidden;
   margin: 2px;
-  /* mobile: full-screen sheet above the taskbar */
   position: fixed;
   inset: 0 0 var(--taskbar-h) 0;
   z-index: 40;

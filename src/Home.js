@@ -34,8 +34,7 @@ function Home() {
     return (
       <div className="home-content p-2">
         <div className="home-main">
-          <h1 className="text-3xl font-bold mb-2">Welcome to My Portfolio</h1>
-          <p className="mb-6">Select a section from the navigation to learn more about me.</p>
+          <h1 className="text-3xl font-bold mb-2">Hello |˶˙ᵕ˙ )ﾉﾞit's me Froi</h1>
 
           <div className="icon-grid mb-8">
             {Object.entries(pageMap).map(([key, { title }]) => (

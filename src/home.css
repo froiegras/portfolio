@@ -4,6 +4,12 @@
   grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr));
 }
 
+.home-content h1,
+.home-content p,
+.desktop-icon span {
+  text-shadow: 0 1px 4px rgb(0 0 0 / 0.7);
+}
+
 .desktop-icon {
   display: flex;
   flex-direction: column;

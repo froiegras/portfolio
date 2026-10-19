@@ -11,6 +11,8 @@
   --c-muted: 148 155 180;
   --c-accent: 124 140 255;
   --taskbar-h: 4rem;
+  --wallpaper: url('./assets/TW (23).png');
+  --wallpaper-dim: 0.55;
 }
 
 html { font-size: 100%; }
@@ -26,6 +28,17 @@ body {
   background-color: rgb(var(--c-desktop));
   color: rgb(var(--c-fg));
   background-attachment: fixed;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(rgb(var(--c-desktop) / var(--wallpaper-dim)),
+                    rgb(var(--c-desktop) / var(--wallpaper-dim))),
+    var(--wallpaper) center / cover no-repeat;
 }
 
 code { font-family: "Work Sans", "Inter", Menlo, Monaco, Consolas, 'Courier New', monospace; }
