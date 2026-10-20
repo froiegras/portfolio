@@ -4,31 +4,31 @@ import GithubRepos from './GithubRepos';
 
 const projects = [
   {
-    id: 'soundboard-bot',
-    icon: '🔊',
-    name: 'Soundboard Discord Bot',
-    kind: 'Personal Project',
-    summary: 'A Discord bot that plays sound clips in voice channels on command.', // placeholder
-    highlights: [
-      'Slash commands to play, queue and list sounds',
-      'Auto reply for specific messages',
-    ], // placeholders
-    tech: ['Python', 'PostgreSQL'], // placeholders
-    links: [
-      { label: 'GitHub', href: '' }, // empty href = link is hidden
-    ],
-  },
-  {
     id: 'api-integration',
     icon: '🔌',
     name: 'Third Party API Integration',
     kind: 'Work Project',
-    summary: 'Integrated an external API into an existing application.',
+    summary: 'Integrated an external payment gateway API into company gateway.',
     highlights: [
       'Handled webhooks and API requests',
       'Spearheaded the integration of a third-party API into an existing application',
-    ], // placeholders
-    tech: ['ReactJS', 'Redis'], // placeholders
+      'Communicated with the API provider to resolve issues and ensure smooth integration',
+    ],
+    tech: ['Angular', 'Python', 'PostgreSQL',],
+    links: [],
+  },
+  {
+    id: 'thesis',
+    icon: '📄',
+    name: 'Thesis',
+    kind: 'Academic Project',
+    summary: 'Effectiveness of Using Fundus Image Data Containing Other Retinal Diseases in Identifying Age-Related Macular Degeneration using Image Classification ',
+    highlights: [
+      'Assisted on development of a machine learning algorithm',
+      'Data preprocessing and augmentation for training the model',
+      'Researched multiple image preprocessing and image segmentation techniques to improve model performance',
+    ],
+    tech: ['Python', 'Conda', 'TensorFlow', 'Keras', 'OpenCV', 'NumPy', 'Pandas'],
     links: [],
   },
 ];

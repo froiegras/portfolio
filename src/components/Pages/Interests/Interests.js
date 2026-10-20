@@ -67,9 +67,9 @@ const interests = [
         id: 'biking',
         icon: '🚴',
         name: 'Biking.exe',
-        summary: 'Casual rides from time to time.',
+        summary:'Casual rides from time to time.',
         log: { rows: rides, label: 'Ride', noun: 'rides' },
-        link: { text: 'My Strava profile', href: 'https://www.strava.com/athletes/YOUR_ID' },
+        // gallery: 'biking',
       },
       {
         id: 'hiking',

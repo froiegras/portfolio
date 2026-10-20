@@ -10,8 +10,9 @@ export const profile = {
   birthDay: 15,
 
   details: [
-    { label: 'Location', value: 'Taguig, Philippines' },
-    { label: 'Working', value: 'Software Engineer' },
+    { label: 'Height', value: '169cm w/o shoes' },
+    { label: 'Weight', value: '85(?)kg' },
+    { label: 'Occupation', value: 'Software Engineer' },
     { label: 'Languages', value: 'English, Filipino' },
   ],
 
