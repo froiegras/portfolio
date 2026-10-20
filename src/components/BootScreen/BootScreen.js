@@ -4,37 +4,56 @@ import './BootScreen.css';
 
 // Decorative only: these lines are for show, not real status checks.
 const LINES = [
-  { text: 'Starting portfolio.exe' },
-  { text: 'Loading skills', ok: true },
-  { text: 'Mounting /interests', ok: true },
+  { text: 'Starting portfolio' },
+  { text: 'Loading web pages', ok: true },
+  { text: 'Mounting components', ok: true },
   { text: 'Connecting to Spotify', ok: true },
   { text: 'Connecting to Steam', ok: true },
-  { text: 'Welcome.' },
 ];
-const STEP_MS = 1000;   // time between lines
+const STEP_MS = 300;
+
+const USER_NAME = 'Froi';
+const PASSWORD_LENGTH = 10;
 
 export default function BootScreen({ onDone }) {
-  const [step, setStep] = useState(0);
+  const [stage, setStage] = useState('boot');
   const [leaving, setLeaving] = useState(false);
+  const [step, setStep] = useState(0);
+  const [typed, setTyped] = useState(0);
+  const [signingIn, setSigningIn] = useState(false);
 
   const finish = useCallback(() => setLeaving(true), []);
 
-  // reveal one line at a time, then pause briefly and start fading out
   useEffect(() => {
-    if (leaving) return undefined;
-    const delay = step >= LINES.length ? 500 : STEP_MS;
-    const t = setTimeout(() => (step >= LINES.length ? finish() : setStep((s) => s + 1)), delay);
+    if (leaving || stage !== 'boot') return undefined;
+    const done = step >= LINES.length;
+    const t = setTimeout(
+      () => (done ? setStage('login') : setStep((s) => s + 1)),
+      done ? 500 : STEP_MS
+    );
     return () => clearTimeout(t);
-  }, [step, leaving, finish]);
+  }, [stage, step, leaving]);
 
-  // after the fade, tell App to remove the screen
+  useEffect(() => {
+    if (leaving || stage !== 'login') return undefined;
+    let t;
+    if (typed < PASSWORD_LENGTH) {
+      const delay = typed === 0 ? 700 : 90 + Math.random() * 130;
+      t = setTimeout(() => setTyped((n) => n + 1), delay);
+    } else if (!signingIn) {
+      t = setTimeout(() => setSigningIn(true), 400);
+    } else {
+      t = setTimeout(finish, 800);
+    }
+    return () => clearTimeout(t);
+  }, [stage, typed, signingIn, leaving, finish]);
+
   useEffect(() => {
     if (!leaving) return undefined;
     const t = setTimeout(onDone, 500);
     return () => clearTimeout(t);
   }, [leaving, onDone]);
 
-  // click, tap or any key skips it
   useEffect(() => {
     window.addEventListener('keydown', finish);
     window.addEventListener('pointerdown', finish);
@@ -46,23 +65,39 @@ export default function BootScreen({ onDone }) {
 
   return (
     <div className={`boot${leaving ? ' leaving' : ''}`} aria-hidden="true">
-      <div className="boot-inner">
-        <div className="boot-logo">💻</div>
+      {stage === 'boot' ? (
+        <div className="boot-inner">
+          <div className="boot-logo">💻</div>
 
-        <ul className="boot-log">
-          {LINES.slice(0, step).map(({ text, ok }) => (
-            <li key={text}>
-              {text}
-              {ok && <span className="boot-ok"> OK</span>}
-            </li>
-          ))}
-        </ul>
+          <ul className="boot-log">
+            {LINES.slice(0, step).map(({ text, ok }) => (
+              <li key={text}>
+                {text}
+                {ok && <span className="boot-ok"> OK</span>}
+              </li>
+            ))}
+          </ul>
 
-        <div className="boot-bar">
-          <span style={{ width: `${(step / LINES.length) * 100}%` }} />
+          <div className="boot-bar">
+            <span style={{ width: `${(step / LINES.length) * 100}%` }} />
+          </div>
+          <p className="boot-skip">Click or press any key to skip</p>
         </div>
-        <p className="boot-skip">Click or press any key to skip</p>
-      </div>
+      ) : (
+        <div className="boot-inner login">
+          <div className="login-avatar">👤</div>
+          <p className="login-name">{USER_NAME}</p>
+
+          <div className="login-field">
+            {Array.from({ length: typed }, (_, i) => (
+              <span key={i} className="login-dot" />
+            ))}
+            {!signingIn && <span className="login-caret" />}
+          </div>
+
+          <p className="login-status">{signingIn ? 'Signing in…' : '\u00a0'}</p>
+        </div>
+      )}
     </div>
   );
 }

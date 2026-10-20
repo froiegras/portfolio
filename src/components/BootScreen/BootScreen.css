@@ -61,3 +61,72 @@
   .boot, .boot-bar span { transition: none; }
   .boot-logo { animation: none; }
 }
+
+.login { text-align: center; }
+
+.login-avatar {
+  display: grid;
+  place-items: center;
+  width: 6rem;
+  height: 6rem;
+  margin: 0 auto 0.75rem;
+  font-size: 2.75rem;
+  border-radius: 50%;
+  background: rgb(var(--c-surface-2));
+  border: 2px solid rgb(var(--c-line));
+}
+
+.login-name {
+  margin: 0 0 1rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.login-field {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: 14rem;
+  height: 2.5rem;
+  margin: 0 auto;
+  padding: 0 0.9rem;
+  overflow: hidden;
+  border: 1px solid rgb(var(--c-line));
+  border-radius: 9999px;
+  background: rgb(var(--c-surface));
+}
+
+.login-dot {
+  flex-shrink: 0;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: rgb(var(--c-fg));
+  animation: login-pop 0.12s ease-out;
+}
+
+.login-caret {
+  width: 2px;
+  height: 1.1rem;
+  background: rgb(var(--c-accent));
+  animation: login-blink 1s steps(1) infinite;
+}
+
+.login-status {
+  height: 1.5rem;
+  margin: 0.75rem 0 0;
+  font-size: 0.8125rem;
+  color: rgb(var(--c-muted));
+}
+
+@keyframes login-pop {
+  from { transform: scale(0); }
+  to   { transform: scale(1); }
+}
+@keyframes login-blink {
+  50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .login-dot, .login-caret { animation: none; }
+}
