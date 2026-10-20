@@ -1,6 +1,6 @@
 // Interests.js
 import React, { useState } from 'react';
-// import Gallery from '../../Gallery/Gallery';
+import Gallery from '../../Gallery/Gallery';
 import SteamTopGames from './SteamTopGames';
 import SpotifyTopTracks from './SpotifyTopTracks';
 import GithubRepoList from './GithubRepoList';
@@ -61,7 +61,7 @@ const interests = [
           { label: 'Years playing', note: 'placeholder' },
           { label: 'Position', note: 'placeholder' },
         ],
-        // gallery: 'frisbee',
+        gallery: 'frisbee',
       },
       {
         id: 'biking',
@@ -69,22 +69,22 @@ const interests = [
         name: 'Biking.exe',
         summary:'Casual rides from time to time.',
         log: { rows: rides, label: 'Ride', noun: 'rides' },
-        // gallery: 'biking',
+        gallery: 'biking',
       },
       {
         id: 'hiking',
         icon: '🥾',
         name: 'Hiking.png',
-        summary: 'Picked this up quite recently.',
-        log: { rows: trails, label: 'Trail', noun: 'hikes' },
-        // gallery: 'hiking',
+        summary: 'I like waking up early to walk up a mountain /s',
+        log: { rows: trails, label: 'Trail', noun: 'hikes', albums: 'hiking' },
+        gallery: 'hiking',
       },
     ],
   },
 ];
 
 function InterestPanel({ item, onNavigate }) {
-  const { summary, items, steam, spotify, github, log, link, children } = item;
+  const { summary, items, steam, spotify, github, log, gallery, link, children } = item;
 
   return (
     <>
@@ -117,7 +117,7 @@ function InterestPanel({ item, onNavigate }) {
       )}
 
       {log && <ActivityLog {...log} />}
-      {/* {gallery && <Gallery folder={gallery} />} */}
+      {gallery && <Gallery folder={gallery} />}
 
       {link &&
         (link.page ? (
