@@ -25,7 +25,7 @@ const interests = [
   },
   {
     id: 'kpop',
-    icon: '🎬',
+    icon: '🍭',
     name: 'Kpop.mp4',
     summary: 'Especially TWICE.',
     items: [{ label: 'TWICE', note: 'my favorite group' }],
@@ -49,7 +49,7 @@ const interests = [
   {
     id: 'sports',
     icon: '🏅',
-    name: 'Sports/',
+    name: 'Sports.json',
     summary: 'Anything outdoors and active.',
     children: [
       {
