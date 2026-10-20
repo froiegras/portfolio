@@ -10,12 +10,13 @@ from common import CachedValue, env
 USERNAME = env("GITHUB_USERNAME")
 TOKEN = os.environ.get("GITHUB_TOKEN")
 
-router = APIRouter(prefix="/api/github")
-http = httpx.AsyncClient(timeout=10, base_url="https://api.github.com")
-
 MAX_REPOS = 6
 HIDE = set()
 README_MAX_CHAR = 20_000
+
+router = APIRouter(prefix="/api/github")
+http = httpx.AsyncClient(timeout=10, base_url="https://api.github.com")
+readme_caches: dict[str, CachedValue] = {}
 
 def request_headers() -> dict:
     h = {
@@ -26,7 +27,6 @@ def request_headers() -> dict:
         h["Authorization"] = f"Bearer {TOKEN}"
     return h
 
-
 async def fetch_repos() -> tuple[dict, int]:
     try:
         r = await http.get(
@@ -36,7 +36,7 @@ async def fetch_repos() -> tuple[dict, int]:
         )
         r.raise_for_status()
     except httpx.HTTPError as e:
-        print("github failed:", e)               # safe to print: the token is in a header
+        print("github failed:", e)
         return {"repos": []}, 600
 
     repos = [
@@ -44,7 +44,7 @@ async def fetch_repos() -> tuple[dict, int]:
         if not x["fork"]
         and not x["archived"]
         and x["name"] not in HIDE
-        and x["name"].lower() != USERNAME.lower()   # skips your profile README repo
+        and x["name"].lower() != USERNAME.lower()
     ][:MAX_REPOS]
 
     return {
@@ -62,17 +62,13 @@ async def fetch_repos() -> tuple[dict, int]:
             }
             for x in repos
         ]
-    }, 3600                                       # cache for 1 hour
-
+    }, 3600
 
 repos_cache = CachedValue(fetch_repos, {"repos": []})
-
 
 @router.get("/repos")
 async def repos():
     return await repos_cache.get()
-
-
 
 async def fetch_readme(name: str) -> tuple[dict, int]:
     try:
@@ -84,15 +80,11 @@ async def fetch_readme(name: str) -> tuple[dict, int]:
         print("github readme failed:", e)
         return {"markdown": None}, 600
 
-    if r.status_code == 404:                     # the repo has no README
+    if r.status_code == 404:
         return {"markdown": None}, 3600
     if r.status_code != 200:
         return {"markdown": None}, 600
     return {"markdown": r.text[:README_MAX_CHAR]}, 3600
-
-
-readme_caches: dict[str, CachedValue] = {}
-
 
 @router.get("/readme/{name}")
 async def readme(name: str):

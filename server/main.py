@@ -11,7 +11,6 @@ app.include_router(spotify.router)
 app.include_router(steam.router)
 app.include_router(github.router)
 
-
 @app.get("/api/health")
 async def health():
     return {"ok": True}

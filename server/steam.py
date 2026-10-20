@@ -10,12 +10,11 @@ KEY = env("STEAM_API_KEY")
 STEAM_ID = env("STEAM_ID")
 MIN_HOURS = 20
 MAX_GAMES = 10
+EMPTY = {"found": False}
+HIDDEN_APPIDS: set[int] = set()
 
 router = APIRouter(prefix="/api/steam")
 http = httpx.AsyncClient(timeout=10, base_url="https://api.steampowered.com")
-HIDDEN_APPIDS: set[int] = set()
-
-EMPTY = {"found": False}
 
 def to_item(g: dict) -> dict:
     appid = g["appid"]
@@ -44,7 +43,6 @@ async def owned_games() -> list:
     r.raise_for_status()
     return r.json().get("response", {}).get("games", [])
 
-
 async def player_summary() -> dict:
     r = await http.get(
         "/ISteamUser/GetPlayerSummaries/v2/",
@@ -53,7 +51,6 @@ async def player_summary() -> dict:
     r.raise_for_status()
     players = r.json().get("response", {}).get("players", [])
     return players[0] if players else {}
-
 
 async def fetch_last_played() -> tuple[dict, int]:
     """Returns (data, seconds to cache it)."""
