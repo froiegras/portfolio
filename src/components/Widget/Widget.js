@@ -1,25 +1,26 @@
-// Widget.js
-import { useRef } from 'react';
-import Draggable from 'react-draggable';
-import useIsDesktop from '../../hooks/useIsDesktop';
+import { useContext } from 'react';
+import { FrameContext } from './FrameContext';
 import './Widget.css';
 
 export default function Widget({ title, children, className = '' }) {
-  const nodeRef = useRef(null);
-  const isDesktop = useIsDesktop();
+  const frame = useContext(FrameContext);
 
   return (
-    <Draggable
-      nodeRef={nodeRef}
-      handle=".widget-title"
-      cancel="a, button"
-      bounds=".home-content"
-      disabled={!isDesktop}
-    >
-      <div ref={nodeRef} className={`widget ${className}`}>
-        <div className="widget-title">{title}</div>
-        <div className="widget-body">{children}</div>
+    <div className={`widget ${className}`}>
+      <div className="widget-title">
+        <span>{title}</span>
+        {frame && (
+          <button
+            className="widget-min"
+            onClick={frame.minimize}
+            aria-label="Minimize"
+            title="Minimize"
+          >
+            –
+          </button>
+        )}
       </div>
-    </Draggable>
+      <div className="widget-body">{children}</div>
+    </div>
   );
 }

@@ -1,4 +1,4 @@
-/* components/Widgets/SteamWidget.css */
+/* components/Widget/SteamWidget.css */
 .steam-row {
   display: flex;
   align-items: center;
@@ -19,7 +19,7 @@
 
 .steam-info { display: flex; flex-direction: column; gap: 0.125rem; min-width: 0; }
 .steam-status { font-size: 0.75rem; color: rgb(var(--c-muted)); }
-.steam-status.live { color: rgb(102 192 244); }   /* Steam blue */
+.steam-status.live { color: rgb(102 192 244); }
 .steam-name {
   font-weight: 600;
   overflow: hidden;

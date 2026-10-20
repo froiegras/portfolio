@@ -6,11 +6,10 @@ import Skills from './components/Pages/Skills/Skills';
 import Work from './components/Pages/Work/Work';
 import Projects from './components/Pages/Projects/Projects';
 import Interests from './components/Pages/Interests/Interests';
-import SpotifyWidget from './components/Widget/SpotifyWidget';
 import DesktopIcon from './components/DesktopIcon/DesktopIcon';
-import SteamWidget from './components/Widget/SteamWidget';
 import BootScreen from './components/BootScreen/BootScreen';
-import ProfileWidget from './components/Widget/ProfileWidget';
+import WidgetFrame from './components/Widget/WidgetFrame';
+import { widgets } from './components/Widget/registry';
 import './Home.css';
 
 function shouldBoot() {
@@ -25,6 +24,27 @@ function shouldBoot() {
 function Home() {
   const [selectedComponent, setSelectedComponent] = useState('home');
   const [booting, setBooting] = useState(shouldBoot);
+  const [minimized, setMinimized] = useState(() => new Set());
+
+  const setWidgetMinimized = useCallback((id, value) => {
+    setMinimized((prev) => {
+      const next = new Set(prev);
+      if (value) next.add(id);
+      else next.delete(id);
+      return next;
+    });
+  }, []);
+
+  const handleMinimizeWidget = useCallback((id) => setWidgetMinimized(id, true), [setWidgetMinimized]);
+
+  const handleWidgetClick = (id) => {
+    if (selectedComponent !== 'home') {
+      setSelectedComponent('home');
+      setWidgetMinimized(id, false);
+      return;
+    }
+    setWidgetMinimized(id, !minimized.has(id));
+  };
 
   const handleBootDone = useCallback(() => {
   try {
@@ -51,7 +71,7 @@ function Home() {
   };
 
   const renderContent = () => {
-    if (selectedComponent === 'home') {
+  if (selectedComponent === 'home') {
     return (
       <div className="home-content p-2">
         <div className="home-main">
@@ -65,9 +85,16 @@ function Home() {
         </div>
 
         <aside className="widget-dock" aria-label="Widgets">
-          <ProfileWidget />
-          <SpotifyWidget />
-          <SteamWidget />
+          {widgets.map(({ id, Component }) => (
+            <WidgetFrame
+              key={id}
+              id={id}
+              minimized={minimized.has(id)}
+              onMinimize={handleMinimizeWidget}
+            >
+              <Component />
+            </WidgetFrame>
+          ))}
         </aside>
       </div>
     );
@@ -95,7 +122,12 @@ function Home() {
       {booting && <BootScreen onDone={handleBootDone} />}
       <div className="app-shell">
         <main className="app-main">{renderContent()}</main>
-        <Navigation onNavItemClick={handleNavItemClick} current={selectedComponent} />
+        <Navigation
+          onNavItemClick={handleNavItemClick}
+          current={selectedComponent}
+          minimizedWidgets={minimized}
+          onWidgetClick={handleWidgetClick}
+        />
       </div>
     </>
   );

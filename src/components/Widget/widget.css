@@ -17,6 +17,10 @@
   cursor: grab;
   touch-action: none;
   user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
 }
 .widget-body { padding: 0.75rem; }
 
@@ -34,4 +38,30 @@
     right: 1rem;
     width: 20rem;
   }
+}
+
+.widget-shell { position: relative; }
+
+.widget-min {
+  display: grid;
+  place-items: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  padding: 0;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  color: inherit;
+  font: inherit;
+  line-height: 1;
+  cursor: pointer;
+}
+.widget-min:hover {
+  background: rgb(var(--c-surface));
+  border-color: rgb(var(--c-line));
+  color: rgb(var(--c-fg));
+}
+
+@media (pointer: coarse) {
+  .widget-min { width: 2rem; height: 2rem; }
 }

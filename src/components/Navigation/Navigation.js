@@ -2,9 +2,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './Navigation.css';
+import Tray from '../Tray/Tray';
 import { ReactComponent as HomeIcon } from '../../assets/home.svg';
 
-function Navigation({ onNavItemClick, current }) {
+function Navigation({ onNavItemClick, current, minimizedWidgets, onWidgetClick }) {
   const [now, setNow] = React.useState(new Date());
 
   React.useEffect(() => {
@@ -39,6 +40,8 @@ function Navigation({ onNavItemClick, current }) {
           </button>
         ))}
       </div>
+
+      <Tray minimized={minimizedWidgets} onWidgetClick={onWidgetClick} />
 
       <div className="taskbar-clock">
         <span>{now.toLocaleTimeString()}</span>

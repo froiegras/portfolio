@@ -1,4 +1,4 @@
-// components/Widgets/SteamWidget.js
+// components/Widget/SteamWidget.js
 import React, { useState, useEffect } from 'react';
 import Widget from '../Widget/Widget';
 import { getLastPlayed } from '../../api/steam';
@@ -7,7 +7,7 @@ import './SteamWidget.css';
 const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
 
 function timeAgo(unixSeconds) {
-  const diff = unixSeconds - Date.now() / 1000;          // negative = in the past
+  const diff = unixSeconds - Date.now() / 1000;
   const steps = [
     ['year', 31536000], ['month', 2592000], ['day', 86400],
     ['hour', 3600], ['minute', 60],
@@ -50,7 +50,6 @@ export default function SteamWidget({ className = '' }) {
               {playingNow ? 'Playing now' : `Last played ${timeAgo(game.lastPlayed)}`}
             </span>
             <span className="steam-name">{game.name}</span>
-            {/* <span className="steam-hours">{game.hoursTotal} hrs on record</span> */}
             {game.hoursTotal != null && (
               <span className="steam-hours">{game.hoursTotal} hrs on record</span>
             )}

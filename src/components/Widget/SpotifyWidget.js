@@ -1,4 +1,4 @@
-// components/Widgets/SpotifyWidget.js
+// components/Widget/SpotifyWidget.js
 import { useState, useEffect } from 'react';
 import Widget from '../Widget/Widget';
 import { getNowPlaying } from '../../api/spotify';
@@ -11,7 +11,7 @@ export default function SpotifyWidget({ className = '' }) {
     const controller = new AbortController();
 
     const load = async () => {
-      if (document.hidden) return;              // skip polling in background tabs
+      if (document.hidden) return;
       try {
         setTrack(await getNowPlaying(controller.signal));
       } catch (e) {
