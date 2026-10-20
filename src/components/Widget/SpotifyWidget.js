@@ -50,7 +50,7 @@ export default function SpotifyWidget({ className = '' }) {
           </div>
         </div>
       ) : (
-        <div className="spotify-idle">Not playing anything right now or I'm on Youtube Music (｡•̀ᴗ-)</div>
+        <div className="spotify-idle">I'm probably on Youtube Music ᵔ ᵕ ᵔ</div>
       )}
     </Widget>
   );
