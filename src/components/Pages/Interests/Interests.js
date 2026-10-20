@@ -1,20 +1,20 @@
 // Interests.js
-import { useState } from 'react';
-import './Interests.css';
-import SteamTopGames from './SteamTopGames';
+import React, { useState } from 'react';
 // import Gallery from '../../Gallery/Gallery';
+import SteamTopGames from './SteamTopGames';
 import SpotifyTopTracks from './SpotifyTopTracks';
 import GithubRepoList from './GithubRepoList';
-
-const P = process.env.PUBLIC_URL + '/assets/gallery';
+import ActivityLog from './ActivityLog';
+import { trails } from '../../../data/trails';
+import { generated as rides } from '../../../data/rides.generated';
+import './Interests.css';
 
 const interests = [
   {
     id: 'coding',
     icon: '💻',
     name: 'Coding.exe',
-    summary:
-      'Making fun Discord bots and scripts that make my life easier.',
+    summary: 'Making fun Discord bots and scripts that make my life easier.',
     items: [
       { label: 'Folder organizer' },
       { label: 'File renamer' },
@@ -27,10 +27,8 @@ const interests = [
     id: 'kpop',
     icon: '🎬',
     name: 'Kpop.mp4',
-    summary: 'I like music especially TWICE.',
-    items: [
-      { label: 'TWICE', note: 'my favorite group' },     // fallback if Spotify returns nothing
-    ],
+    summary: 'Especially TWICE.',
+    items: [{ label: 'TWICE', note: 'my favorite group' }],
     spotify: [
       { key: 'twice', caption: 'Most played TWICE songs (past year)' },
       { key: 'kpop', caption: 'Most played K-pop overall (past year)' },
@@ -40,7 +38,7 @@ const interests = [
     id: 'games',
     icon: '🎮',
     name: 'Video Games.exe',
-    summary: 'I like video games',
+    summary: 'Mostly co-op and action games.',
     items: [
       { label: 'Monster Hunter World / Wilds' },
       { label: 'Apex Legends' },
@@ -51,87 +49,116 @@ const interests = [
   {
     id: 'sports',
     icon: '🏅',
-    name: 'Sports.py',
-    summary: 'Frisbee is my favorite, and I casually bike from time to time.',
-    items: [
-      { label: 'Frisbee', note: 'favorite' },
-      { label: 'Biking', note: 'casual' },
-    ],
-  },
-  {
-    id: 'hiking',
-    icon: '🥾',
-    name: 'Hiking.png',
-    summary: 'Picked this up quite recently.',
-    items: [
-      { label: 'Mt. Example', note: '2025' },
-      { label: 'Another Trail', note: '2026' },
-    ],
-    photos: [
-      { src: `${P}/hiking/mt-example.webp`, alt: 'View from the summit of Mt. Example', caption: 'Mt. Example, 2025' },
-      { src: `${P}/hiking/trail-2.webp`, alt: 'Forest trail in the morning', caption: 'Another Trail, 2026' },
-      { src: `${P}/hiking/mt-example.webp`, alt: 'Summit view', caption: 'Mt. Example, 2025' },
+    name: 'Sports/',
+    summary: 'Anything outdoors and active.',
+    children: [
       {
-        type: 'video',
-        src: `${P}/hiking/ridge-walk.mp4`,
-        poster: `${P}/hiking/ridge-walk-poster.webp`,
-        alt: 'Walking along a ridge at sunrise',
-        caption: 'Ridge walk',
+        id: 'frisbee',
+        icon: '🥏',
+        name: 'Frisbee.py',
+        summary: 'My favorite sport.',
+        items: [
+          { label: 'Years playing', note: 'placeholder' },
+          { label: 'Position', note: 'placeholder' },
+        ],
+        // gallery: 'frisbee',
+      },
+      {
+        id: 'biking',
+        icon: '🚴',
+        name: 'Biking.exe',
+        summary: 'Casual rides from time to time.',
+        log: { rows: rides, label: 'Ride', noun: 'rides' },
+        link: { text: 'My Strava profile', href: 'https://www.strava.com/athletes/YOUR_ID' },
+      },
+      {
+        id: 'hiking',
+        icon: '🥾',
+        name: 'Hiking.png',
+        summary: 'Picked this up quite recently.',
+        log: { rows: trails, label: 'Trail', noun: 'hikes' },
+        // gallery: 'hiking',
       },
     ],
   },
 ];
 
-function Interests({ onNavigate }) {
-  const [openId, setOpenId] = useState(null);
+function InterestPanel({ item, onNavigate }) {
+  const { summary, items, steam, spotify, github, log, link, children } = item;
 
+  return (
+    <>
+      {summary && <p className="subtext">{summary}</p>}
+
+      {steam && <SteamTopGames fallback={items} />}
+
+      {spotify?.map(({ key, caption }, i) => (
+        <SpotifyTopTracks
+          key={key}
+          genreKey={key}
+          caption={caption}
+          fallback={i === 0 ? items : []}
+        />
+      ))}
+
+      {github && (
+        <GithubRepoList caption="Recently active repos on my GitHub" fallback={items} />
+      )}
+
+      {!steam && !spotify && !github && items && (
+        <ul className="interest-tree">
+          {items.map(({ label, note }) => (
+            <li key={label}>
+              {label}
+              {note && <span className="interest-note"> {note}</span>}
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {log && <ActivityLog {...log} />}
+      {/* {gallery && <Gallery folder={gallery} />} */}
+
+      {link &&
+        (link.page ? (
+          <button className="interest-link" onClick={() => onNavigate(link.page)}>
+            {link.text} →
+          </button>
+        ) : (
+          <a className="interest-link" href={link.href} target="_blank" rel="noreferrer">
+            {link.text} ↗
+          </a>
+        ))}
+
+      {children && <Accordion items={children} onNavigate={onNavigate} nested />}
+    </>
+  );
+}
+
+function Accordion({ items, onNavigate, nested = false }) {
+  const [openId, setOpenId] = useState(null);
   const toggle = (id) => setOpenId((current) => (current === id ? null : id));
 
   return (
-    <div className="interests-list">
-      {interests.map(({ id, icon, name, summary, items, link, photos, steam, spotify, github }) => {
-        const isOpen = openId === id;
+    <div className={`interests-list${nested ? ' nested' : ''}`}>
+      {items.map((item) => {
+        const isOpen = openId === item.id;
         return (
-          <div key={id} className={`interest-item${isOpen ? ' open' : ''}`}>
+          <div key={item.id} className={`interest-item${isOpen ? ' open' : ''}`}>
             <button
               className="interest-header"
-              onClick={() => toggle(id)}
+              onClick={() => toggle(item.id)}
               aria-expanded={isOpen}
-              aria-controls={`panel-${id}`}
+              aria-controls={`panel-${item.id}`}
             >
               <span className="interest-chevron" aria-hidden="true">▸</span>
-              <span className="interest-icon" aria-hidden="true">{icon}</span>
-              <span className="interest-name">{name}</span>
+              <span className="interest-icon" aria-hidden="true">{item.icon}</span>
+              <span className="interest-name">{item.name}</span>
             </button>
 
-            <div id={`panel-${id}`} className="interest-panel">
+            <div id={`panel-${item.id}`} className="interest-panel">
               <div className="interest-panel-inner">
-                <p className="subtext">{summary}</p>
-                {steam && <SteamTopGames fallback={items} />}
-
-                {spotify?.map(({ key, caption }, i) => (
-                  <SpotifyTopTracks
-                    key={key}
-                    genreKey={key}
-                    caption={caption}
-                    fallback={i === 0 ? items : []}
-                  />
-                ))}
-
-                {github && (
-                  <GithubRepoList caption="Recently active repos on my GitHub" fallback={items} />
-                )}
-
-                {!steam && !spotify && !github && items && (
-                  <ul className="interest-tree">
-                    {items.map(({ label, note }) => (
-                      <li key={label}>
-                        {label}
-                        {note && <span className="interest-note"> {note}</span>}
-                      </li>
-                    ))}
-                  </ul>
-                )}
+                <InterestPanel item={item} onNavigate={onNavigate} />
               </div>
             </div>
           </div>
@@ -139,6 +166,10 @@ function Interests({ onNavigate }) {
       })}
     </div>
   );
+}
+
+function Interests({ onNavigate }) {
+  return <Accordion items={interests} onNavigate={onNavigate} />;
 }
 
 export default Interests;
