@@ -10,6 +10,7 @@ import SpotifyWidget from './components/Widget/SpotifyWidget';
 import DesktopIcon from './components/DesktopIcon/DesktopIcon';
 import SteamWidget from './components/Widget/SteamWidget';
 import BootScreen from './components/BootScreen/BootScreen';
+import ProfileWidget from './components/Widget/ProfileWidget';
 import './Home.css';
 
 function shouldBoot() {
@@ -64,6 +65,7 @@ function Home() {
         </div>
 
         <aside className="widget-dock" aria-label="Widgets">
+          <ProfileWidget />
           <SpotifyWidget />
           <SteamWidget />
         </aside>
