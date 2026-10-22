@@ -1,10 +1,11 @@
 // Interests.js
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Gallery from '../../Gallery/Gallery';
 import SteamTopGames from './SteamTopGames';
 import SpotifyTopTracks from './SpotifyTopTracks';
 import GithubRepoList from './GithubRepoList';
 import ActivityLog from './ActivityLog';
+import YouTubeMusicRecent from './YoutubeMusicRecent';
 import { trails } from '../../../data/trails';
 import { generated as rides } from '../../../data/rides.generated';
 import './Interests.css';
@@ -33,6 +34,7 @@ const interests = [
       { key: 'twice', caption: 'Most played TWICE songs (past year)' },
       { key: 'kpop', caption: 'Most played K-pop overall (past year)' },
     ],
+    ytmusic: { caption: 'Recently played on YouTube Music', only: ['TWICE'] },
   },
   {
     id: 'games',
@@ -84,7 +86,7 @@ const interests = [
 ];
 
 function InterestPanel({ item, onNavigate }) {
-  const { summary, items, steam, spotify, github, log, gallery, link, children } = item;
+  const { summary, items, steam, spotify, ytmusic, github, log, gallery, link, children } = item;
 
   return (
     <>
@@ -101,11 +103,13 @@ function InterestPanel({ item, onNavigate }) {
         />
       ))}
 
+      {ytmusic && <YouTubeMusicRecent {...ytmusic} />}
+
       {github && (
         <GithubRepoList caption="Recently active repos on my GitHub" fallback={items} />
       )}
 
-      {!steam && !spotify && !github && items && (
+      {!steam && !spotify && !ytmusic && !github && items && (
         <ul className="interest-tree">
           {items.map(({ label, note }) => (
             <li key={label}>

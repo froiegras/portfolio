@@ -28,3 +28,7 @@
 }
 .steam-hours { font-size: 0.75rem; color: rgb(var(--c-muted)); }
 .steam-idle { font-size: 0.875rem; font-style: italic; color: rgb(var(--c-muted)); }
+
+.spotify-last { display: flex; flex-direction: column; color: inherit; text-decoration: none; }
+.spotify-last:hover .spotify-track { color: rgb(var(--c-accent)); text-decoration: underline; }
+.spotify-last-label { margin-bottom: 0.125rem; font-size: 0.75rem; color: rgb(var(--c-muted)); }

@@ -27,3 +27,4 @@ server/.env
 server/__pycache__/
 strava-activities/
 dev-media/
+server/browser.json
