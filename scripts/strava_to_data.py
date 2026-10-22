@@ -9,11 +9,11 @@ from zoneinfo import ZoneInfo
 CSV_PATH = "./strava-activities/activities.csv"
 OUT_PATH = "src/data/rides.generated.js"
 
-TZ = ZoneInfo("Asia/Manila")      # the export stores UTC, so convert to your timezone
-SINCE = "2024-01-01"              # only include rides on or after this date ("" = all)
-MIN_KM = 1.0                      # skip tiny activities
-DIST_IN_METERS = True             # if distances look 1000x too big or small, flip this
-RIDE_TYPES = {"Ride"}             # add "E-Bike Ride" or "Mountain Bike Ride" if you want them
+TZ = ZoneInfo("Asia/Manila")
+SINCE = "2024-01-01"
+MIN_KM = 1.0
+DIST_IN_METERS = True
+RIDE_TYPES = {"Ride"}
 
 with open(CSV_PATH, newline="", encoding="utf-8") as f:
     reader = csv.reader(f)
@@ -31,7 +31,7 @@ def col(name, last=False, required=True):
 
 
 i_date, i_name, i_type = col("Activity Date"), col("Activity Name"), col("Activity Type")
-i_dist = col("Distance", last=True)         # the file has several Distance columns
+i_dist = col("Distance", last=True)
 i_gain = col("Elevation Gain", last=True, required=False)
 needed = max(i for i in (i_date, i_name, i_type, i_dist, i_gain) if i is not None)
 
@@ -77,4 +77,4 @@ with open(OUT_PATH, "w", encoding="utf-8") as f:
 
 print(f"{OUT_PATH}: {len(rides)} rides")
 for i in rides[:3]:
-    print("   ", i)          # check these against the Strava app
+    print("   ", i)

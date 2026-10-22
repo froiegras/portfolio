@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Navigation.css';
 import Tray from '../Tray/Tray';
+import ThemeToggle from '../ThemeToggle/ThemeToggle';
 import { ReactComponent as HomeIcon } from '../../assets/home.svg';
 
 function Navigation({ onNavItemClick, current, minimizedWidgets, onWidgetClick }) {
@@ -42,6 +43,7 @@ function Navigation({ onNavItemClick, current, minimizedWidgets, onWidgetClick }
       </div>
 
       <Tray minimized={minimizedWidgets} onWidgetClick={onWidgetClick} />
+      <ThemeToggle />
 
       <div className="taskbar-clock">
         <span>{now.toLocaleTimeString()}</span>

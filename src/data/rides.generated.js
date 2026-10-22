@@ -1,4 +1,3 @@
-// Generated from a Strava export. Review the names before publishing.
 export const generated = [
   {"name": "Papa Visit", "date": "2026-10-18", "km": 16.8, "gain": 113},
   {"name": "Rex Blessing Ride", "date": "2026-10-04", "km": 7.2, "gain": 41},

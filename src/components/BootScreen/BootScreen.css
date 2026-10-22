@@ -30,7 +30,7 @@
   line-height: 1.7;
 }
 .boot-log li::before { content: '> '; color: rgb(var(--c-muted)); }
-.boot-ok { color: rgb(34 197 94); }
+.boot-ok { color: rgb(var(--c-ok)); }
 
 .boot-bar {
   height: 4px;

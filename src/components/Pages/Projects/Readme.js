@@ -36,7 +36,6 @@ export default function Readme({ repo }) {
     return () => controller.abort();
   }, [repo.name]);
 
-  // With no button to explain a failure, a missing README just doesn't appear
   if (state.status === 'empty' || state.status === 'error') return null;
 
   return (

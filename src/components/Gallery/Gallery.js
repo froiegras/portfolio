@@ -4,18 +4,6 @@ import './Gallery.css';
 
 const isVideo = (p) => p.type === 'video';
 
-// Note for file formats for Gallery:
-// Images:
-// - Resize and compress: about 1600px on the long edge, saved as WebP, usually 150-300 KB each.
-// squoosh.app does this in the browser. Phone photos are often 3-5 MB and would make the page slow.
-// - Strip location data: hiking photos often carry GPS coordinates in their metadata.
-// Squoosh removes it when it re-encodes, but check that yours has no location left before publishing.
-
-// Videos:
-// - Use MP4 with H.264 video and AAC audio. It plays in every browser.
-// iPhone .mov files are often HEVC (H.265), which Chrome and Firefox may refuse to play, so convert them.
-// - Compress before uploading. Phone videos can be hundreds of MB.
-// This ffmpeg command gives roughly 3-8 MB per 30 seconds at 720p, strips metadata (including GPS), and lets playback start before the whole file downloads
 function Gallery({ folder }) {
   const [photos, setPhotos] = useState([]);
   const [index, setIndex] = useState(0);
@@ -64,7 +52,6 @@ function Gallery({ folder }) {
   const close = () => dialogRef.current.close();
   const step = (d) => setIndex((i) => (i + d + photos.length) % photos.length);
 
-  // arrow keys while the lightbox is open
   useEffect(() => {
     if (!isOpen) return undefined;
     const onKey = (e) => {

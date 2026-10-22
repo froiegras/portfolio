@@ -3,8 +3,6 @@ export const profile = {
   name: 'Froi',
   avatar: '👤',
 
-
-  // The age is calculated from these, so it stays current without edits.
   birthYear: 2001,
   birthMonth: 4,
   birthDay: 15,

@@ -27,7 +27,7 @@ class CachedValue:
         self._fetch = fetch
         self._data = initial
         self._expires = 0.0
-        self._lock = asyncio.Lock()      # one upstream call at a time
+        self._lock = asyncio.Lock()
 
     async def get(self) -> dict:
         async with self._lock:

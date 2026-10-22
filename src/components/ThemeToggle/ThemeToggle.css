@@ -1,0 +1,18 @@
+/* components/ThemeToggle/ThemeToggle.css */
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.125rem;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+.theme-toggle:hover {
+  background: rgb(var(--c-surface-2));
+  border-color: rgb(var(--c-line));
+}

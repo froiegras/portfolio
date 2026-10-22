@@ -43,15 +43,15 @@ async def fetch_now_playing() -> tuple[dict, int]:
     try:
         r = await http.get(
             "https://api.spotify.com/v1/me/player/currently-playing",
-            params={"additional_types": "episode"},       # also report podcasts
+            params={"additional_types": "episode"},
             headers={"Authorization": f"Bearer {await access_token()}"},
         )
     except httpx.HTTPError:
         return IDLE, 15
 
-    if r.status_code == 429:                               # rate limited: back off
+    if r.status_code == 429:
         return IDLE, int(r.headers.get("Retry-After", 30))
-    if r.status_code != 200:                               # 204 = nothing playing
+    if r.status_code != 200:
         return IDLE, 10
 
     j = r.json()
@@ -79,7 +79,6 @@ now_playing_cache = CachedValue(fetch_now_playing, IDLE)
 async def now_playing():
     return await now_playing_cache.get()
 
-# ---- top tracks by genre ---------------------------------------------------
 async def api_get(path: str, **params) -> dict:
     r = await http.get(
         f"https://api.spotify.com/v1{path}",

@@ -58,8 +58,8 @@ const interests = [
         name: 'Frisbee.py',
         summary: 'My favorite sport.',
         items: [
-          { label: 'Years playing', note: 'placeholder' },
-          { label: 'Position', note: 'placeholder' },
+          { label: 'Teams', note: 'UFO (CSA-Makati), MUFC (Pick-ups)' },
+          { label: 'Position', note: 'Cutter' },
         ],
         gallery: 'frisbee',
       },

@@ -8,7 +8,6 @@ function Folder({ children, title, onClose, originKey }) {
   const ref = useRef(null);
   const closing = useRef(false);
 
-  // how far/small the window should be when "tucked" into its taskbar button
   const getTucked = () => {
     const target = document.querySelector(`[data-nav-key="${originKey}"]`);
     if (!target || !ref.current) return null;
@@ -24,7 +23,6 @@ function Folder({ children, title, onClose, originKey }) {
 
   const tucked = (m) => `translate(${m.x}px, ${m.y}px) scale(${m.sx}, ${m.sy})`;
 
-  // open animation (runs before first paint, so there's no flash)
   useLayoutEffect(() => {
     const m = getTucked();
     if (!m || reduceMotion()) return;
@@ -38,7 +36,6 @@ function Folder({ children, title, onClose, originKey }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // close animation, then actually unmount
   const handleClose = () => {
     if (closing.current) return;
     closing.current = true;

@@ -22,7 +22,7 @@ export default function ActivityLog({ rows, label = 'Trail', noun = 'activities'
         )
       )
       .catch(() => {})
-      .finally(() => { if (!controller.signal.aborted) setListed(true); });          // no listing available: simply no photo buttons
+      .finally(() => { if (!controller.signal.aborted) setListed(true); });
     return () => controller.abort();
   }, [albums]);
 
@@ -37,7 +37,7 @@ export default function ActivityLog({ rows, label = 'Trail', noun = 'activities'
 
   if (!rows || rows.length === 0) return null;
 
-  const sorted = [...rows].sort((a, b) => b.date.localeCompare(a.date));   // newest first
+  const sorted = [...rows].sort((a, b) => b.date.localeCompare(a.date));
   const totalKm = rows.reduce((sum, r) => sum + (r.km || 0), 0);
   const withGain = rows.filter((r) => r.gain);
   const biggest = withGain.length

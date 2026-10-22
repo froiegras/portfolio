@@ -2,7 +2,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './BootScreen.css';
 
-// Decorative only: these lines are for show, not real status checks.
 const LINES = [
   { text: 'Starting portfolio' },
   { text: 'Loading web pages', ok: true },
