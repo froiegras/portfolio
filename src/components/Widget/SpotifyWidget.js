@@ -73,6 +73,7 @@ export default function SpotifyWidget({ className = '' }) {
       </a>
     );
   } else {
+    title = '▶ Now Playing';
     body = <div className="spotify-idle">Not playing anything right now</div>;
   }
 
