@@ -1,4 +1,4 @@
-import { useRef, useLayoutEffect } from 'react';
+import { useRef, useState, useLayoutEffect } from 'react';
 import './Folder.css';
 
 const reduceMotion = () =>
@@ -7,6 +7,8 @@ const reduceMotion = () =>
 function Folder({ children, title, onClose, originKey }) {
   const ref = useRef(null);
   const closing = useRef(false);
+  const firstRect = useRef(null);
+  const [maximized, setMaximized] = useState(false);
 
   const getTucked = () => {
     const target = document.querySelector(`[data-nav-key="${originKey}"]`);
@@ -56,13 +58,51 @@ function Folder({ children, title, onClose, originKey }) {
       .finished.then(onClose);
   };
 
+  const toggleMaximize = () => {
+    if (closing.current || !ref.current) return;
+    firstRect.current = ref.current.getBoundingClientRect();
+    setMaximized((m) => !m);
+  };
+
+  useLayoutEffect(() => {
+    const first = firstRect.current;
+    if (!first || !ref.current) return;
+    firstRect.current = null;
+    if (reduceMotion()) return;
+
+    const last = ref.current.getBoundingClientRect();
+    ref.current.animate(
+      [
+        {
+          transformOrigin: 'top left',
+          transform: `translate(${first.left - last.left}px, ${first.top - last.top}px) scale(${first.width / last.width}, ${first.height / last.height})`,
+        },
+        { transformOrigin: 'top left', transform: 'none' },
+      ],
+      { duration: 220, easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)' }
+    );
+  }, [maximized]);
+
+  const maxLabel = maximized ? 'Restore' : 'Maximize';
+
   return (
-    <section ref={ref} className="window" role="dialog" aria-label={title || 'Folder'}>
+    <section
+      ref={ref}
+      className={`window${maximized ? ' maximized' : ''}`}
+      aria-label={title || 'Folder'}
+    >
       <header className="window-titlebar">
         <span className="window-title">📁 {title || 'Folder'}</span>
         <div className="window-controls">
           <button className="topbar-buttons minimize hidden md:flex" onClick={handleClose} aria-label="Minimize">-</button>
-          <button className="topbar-buttons maximize hidden md:flex" aria-label="Maximize">+</button>
+          <button
+            className="topbar-buttons maximize hidden md:flex"
+            onClick={toggleMaximize}
+            aria-label={maxLabel}
+            title={maxLabel}
+          >
+            {maximized ? '☐' : '+'}
+          </button>
           <button className="topbar-buttons close" onClick={handleClose} aria-label="Close">X</button>
         </div>
       </header>
