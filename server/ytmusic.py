@@ -1,5 +1,5 @@
 # server/ytmusic.py
-import asyncio
+import asyncio, os
 from pathlib import Path
 
 from fastapi import APIRouter
@@ -7,7 +7,7 @@ from ytmusicapi import YTMusic
 
 from common import CachedValue
 
-AUTH_FILE = Path(__file__).parent / "browser.json"
+AUTH_FILE = Path(os.environ.get("YTMUSIC_AUTH_FILE") or Path(__file__).parent / "browser.json")
 MAX_ITEMS = 30
 
 router = APIRouter(prefix="/api/ytmusic")
@@ -30,19 +30,18 @@ def to_track(item: dict) -> dict:
         "artist": ", ".join(a["name"] for a in item.get("artists") or [] if a.get("name")),
         "image": (thumbs[1] if len(thumbs) > 1 else thumbs[0])["url"] if thumbs else None,
         "url": f"https://music.youtube.com/watch?v={video_id}",
-        "played": item.get("played"),        # e.g. "Today", "Yesterday"
+        "played": item.get("played"),
     }
 
 async def fetch_recent() -> tuple[dict, int]:
     try:
-        # ytmusicapi is blocking, so run it off the event loop
         history = await asyncio.to_thread(lambda: client().get_history())
-    except Exception as e:                   # the library raises several of its own error types
+    except Exception as e:
         print("ytmusic failed:", type(e).__name__, e)
         return EMPTY, 600
 
     tracks = [to_track(i) for i in history if i.get("videoId")][:MAX_ITEMS]
-    return {"found": bool(tracks), "tracks": tracks}, 300     # cache for 5 minutes
+    return {"found": bool(tracks), "tracks": tracks}, 300
 
 recent_cache = CachedValue(fetch_recent, EMPTY)
 
