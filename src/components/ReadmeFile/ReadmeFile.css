@@ -1,0 +1,12 @@
+/* components/ReadmeFile/ReadmeFile.css */
+.textfile {
+  margin: 0;
+  padding: 1rem;
+  font-family: monospace;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  background: rgb(var(--c-desktop) / 0.5);
+  border: 1px solid rgb(var(--c-line));
+  border-radius: 0.375rem;
+}

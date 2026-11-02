@@ -49,6 +49,13 @@
   margin-top: 1.5rem;
 }
 
+@keyframes desktop-in { from { opacity: 0; } to { opacity: 1; } }
+.desktop-enter { animation: desktop-in 0.5s ease-out; }
+
+@media (prefers-reduced-motion: reduce) {
+  .desktop-enter { animation: none; }
+}
+
 @media (min-width: 768px) {
   .app-main { padding: 1.5rem 1.5rem calc(var(--taskbar-h) + 1.5rem); }
 }

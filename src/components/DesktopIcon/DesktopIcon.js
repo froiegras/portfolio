@@ -1,9 +1,8 @@
-// components/DesktopIcon/DesktopIcon.js
 import { useRef } from 'react';
 import Draggable from 'react-draggable';
 import useIsDesktop from '../../hooks/useIsDesktop';
 
-export default function DesktopIcon({ label, onOpen }) {
+export default function DesktopIcon({ label, icon = '📁', onOpen }) {
   const nodeRef = useRef(null);
   const moved = useRef(false);
   const isDesktop = useIsDesktop();
@@ -21,7 +20,7 @@ export default function DesktopIcon({ label, onOpen }) {
         className="desktop-icon"
         onClick={() => { if (!moved.current) onOpen(); }}
       >
-        <span className="desktop-icon-img">📁</span>
+        <span className="desktop-icon-img">{icon}</span>
         <span>{label}</span>
       </button>
     </Draggable>

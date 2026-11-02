@@ -1,0 +1,61 @@
+/* components/Photos/Photos.css */
+.photos-note { font-style: italic; color: rgb(var(--c-muted)); }
+
+.photos-section {
+  margin: 1.25rem 0 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgb(var(--c-muted));
+}
+.photos-section:first-child { margin-top: 0; }
+
+.photos-grid {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+}
+
+.photos-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  width: 100%;
+  padding: 0;
+  text-align: left;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.photos-cover {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  font-size: 2rem;
+  background: rgb(var(--c-surface-2));
+  border: 1px solid rgb(var(--c-line));
+  border-radius: 0.5rem;
+  transition: border-color 0.2s;
+}
+.photos-cover img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+.photos-tile:hover .photos-cover { border-color: rgb(var(--c-accent) / 0.6); }
+.photos-tile:hover .photos-cover img { transform: scale(1.05); }
+.photos-name { font-size: 0.875rem; font-weight: 600; }
+
+.photos-back {
+  padding: 0;
+  background: none;
+  border: none;
+  color: rgb(var(--c-accent));
+  font: inherit;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+.photos-back:hover { text-decoration: underline; }
+.photos-title { margin: 0.5rem 0 0.75rem; font-size: 1.125rem; font-weight: 700; }

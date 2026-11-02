@@ -1,16 +1,30 @@
 // App.js
-import React, { useState, useCallback  } from 'react';
+import { useState, useCallback, Suspense, lazy } from 'react';
+
 import Folder from './components/Folder/Folder';
 import Navigation from './components/Navigation/Navigation';
-import Skills from './components/Pages/Skills/Skills';
-import Work from './components/Pages/Work/Work';
-import Projects from './components/Pages/Projects/Projects';
-import Interests from './components/Pages/Interests/Interests';
 import DesktopIcon from './components/DesktopIcon/DesktopIcon';
 import BootScreen from './components/BootScreen/BootScreen';
 import WidgetFrame from './components/Widget/WidgetFrame';
+
+import { pages } from './pages';
 import { widgets } from './components/Widget/registry';
+import { desktopItems } from './data/desktop';
+import hasWebGL from './utils/webgl';
+
 import './Home.css';
+
+const Room = lazy(() => import('./components/Room/Room'));
+
+function shouldShowRoom() {
+  try {
+    if (new URLSearchParams(window.location.search).has('room')) return true;
+    if (navigator.connection?.saveData) return false;
+    if (sessionStorage.getItem('entered') === '1') return false;
+  } catch {
+  }
+  return hasWebGL();
+}
 
 function shouldBoot() {
   try {
@@ -25,6 +39,15 @@ function Home() {
   const [selectedComponent, setSelectedComponent] = useState('home');
   const [booting, setBooting] = useState(shouldBoot);
   const [minimized, setMinimized] = useState(() => new Set());
+  const [phase, setPhase] = useState(() => (shouldShowRoom() ? 'room' : 'desktop'));
+
+  const handleEnter = useCallback(() => {
+  try {
+    sessionStorage.setItem('entered', '1');
+  } catch {
+  }
+  setPhase('desktop');
+}, []);
 
   const setWidgetMinimized = useCallback((id, value) => {
     setMinimized((prev) => {
@@ -63,13 +86,6 @@ function Home() {
     setSelectedComponent('home');
   };
 
-  const pageMap = {
-    'interests': { component: <Interests onNavigate={handleNavItemClick} />, title: 'My Interests' },
-    'skills': { component: <Skills />, title: 'Skills & Abilities' },
-    'work': { component: <Work />, title: 'Work Experience' },
-    'projects': { component: <Projects />, title: 'Projects' },
-  };
-
   const renderContent = () => {
   if (selectedComponent === 'home') {
     return (
@@ -78,8 +94,8 @@ function Home() {
           <h1 className="text-3xl font-bold mb-2">Hello |˶˙ᵕ˙ )ﾉﾞit's me Froi</h1>
 
           <div className="icon-grid mb-8">
-            {Object.entries(pageMap).map(([key, { title }]) => (
-              <DesktopIcon key={key} label={title} onOpen={() => setSelectedComponent(key)} />
+            {desktopItems.map(({ id, label, icon }) => (
+              <DesktopIcon key={id} label={label} icon={icon} onOpen={() => setSelectedComponent(id)} />
             ))}
           </div>
         </div>
@@ -99,8 +115,22 @@ function Home() {
       </div>
     );
   }
+    const page = pages[selectedComponent];
+    if (page) {
+      const { Component, title } = page;
+      return (
+        <Folder
+          key={selectedComponent}
+          originKey={selectedComponent}
+          title={title}
+          onClose={handleCloseFolder}
+        >
+          <Component onNavigate={handleNavItemClick} />
+        </Folder>
+      );
+    }
 
-    const selectedItem = pageMap[selectedComponent];
+    const selectedItem = pages[selectedComponent];
     if (selectedItem) {
       return (
         <Folder
@@ -117,10 +147,18 @@ function Home() {
     return null;
   };
 
+  if (phase === 'room') {
+    return (
+      <Suspense fallback={<div className="room" />}>
+        <Room onEnter={handleEnter} />
+      </Suspense>
+    );
+  }
+
   return (
     <>
       {booting && <BootScreen onDone={handleBootDone} />}
-      <div className="app-shell">
+      <div className="app-shell desktop-enter">
         <main className="app-main">{renderContent()}</main>
         <Navigation
           onNavItemClick={handleNavItemClick}
