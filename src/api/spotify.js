@@ -10,3 +10,15 @@ export async function getTopTracks(key, signal) {
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return res.json();
 }
+
+export async function getPlaylists(signal) {
+  const res = await fetch('/api/spotify/playlists', { signal });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
+}
+
+export async function getPlaylistSongs(id, signal) {
+  const res = await fetch(`/api/spotify/playlists/${encodeURIComponent(id)}/songs`, { signal });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
+}
