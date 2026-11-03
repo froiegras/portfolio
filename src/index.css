@@ -92,3 +92,13 @@ a { color: rgb(var(--c-accent)); }
 @media (min-width: 768px) {
   html { font-size: 112.5%; }  /* 18px on desktop; phones stay at 16px */
 }
+
+@media (max-width: 767px) {
+  :root,
+  [data-theme='light'] {
+    --wallpaper: url('./assets/light-mobile-wallpaper.webp');
+  },
+  [data-theme='dark'] {
+    --wallpaper: url('./assets/dark-mobile-wallpaper.webp');
+  }
+}

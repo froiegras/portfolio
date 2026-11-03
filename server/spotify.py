@@ -14,7 +14,7 @@ http = httpx.AsyncClient(timeout=10)
 
 SONG_CAP = 200
 MAX_TRACKS = 10
-vTIME_RANGE = "long_term"
+TIME_RANGE = "long_term"
 IDLE = {"isPlaying": False}
 GENRES = {"kpop": "k-pop"}
 ARTISTS = {"twice": "TWICE"}
@@ -165,7 +165,7 @@ def plain(text: str) -> str:
 
 def to_playlist(p: dict) -> dict:
     images = p.get("images") or []
-    meta = p.get("items") or p.get("tracks") or {}          # 'tracks' was renamed to 'items'
+    meta = p.get("items") or p.get("tracks") or {}
     return {
         "id": p["id"],
         "name": p["name"],
@@ -180,7 +180,7 @@ async def fetch_playlists() -> tuple[dict, int]:
     try:
         me = await my_id()
         found, offset = [], 0
-        while offset < 200:                                  # at most 4 pages
+        while offset < 200:
             page = await api_get("/me/playlists", limit=50, offset=offset)
             found += page.get("items", [])
             if not page.get("next"):
@@ -193,12 +193,11 @@ async def fetch_playlists() -> tuple[dict, int]:
     mine = [
         p for p in found
         if p
-        and p["owner"]["id"] == me            # skip playlists you only follow
-        and p.get("public")                   # the site is public, and embeds only play public ones
+        and p["owner"]["id"] == me
+        and p.get("public")
         and p["id"] not in HIDE_PLAYLISTS
     ]
-    return {"playlists": [to_playlist(p) for p in mine]}, 3600       # cache for 1 hour
-
+    return {"playlists": [to_playlist(p) for p in mine]}, 3600
 playlists_cache = CachedValue(fetch_playlists, {"playlists": []})
 
 
@@ -207,18 +206,18 @@ async def playlists():
     return await playlists_cache.get()
 
 def to_song(entry: dict) -> dict | None:
-    item = entry.get("item") or entry.get("track")        # 'track' was renamed to 'item'
-    if not item or not item.get("id"):                    # removed, unavailable or local files
+    item = entry.get("item") or entry.get("track")
+    if not item or not item.get("id"):
         return None
     images = (item.get("album") or {}).get("images") or item.get("images") or []
     artist = ", ".join(a["name"] for a in item.get("artists") or [] if a.get("name")) \
         or (item.get("show") or {}).get("name", "")
     return {
         "id": item["id"],
-        "type": item.get("type", "track"),                # 'track' or 'episode'
+        "type": item.get("type", "track"),
         "title": item["name"],
         "artist": artist,
-        "image": images[-1]["url"] if images else None,   # the smallest cover
+        "image": images[-1]["url"] if images else None,
         "ms": item.get("duration_ms"),
         "url": (item.get("external_urls") or {}).get("spotify"),
     }
@@ -242,14 +241,13 @@ async def fetch_playlist_songs(playlist_id: str) -> tuple[dict, int]:
     except httpx.HTTPError as e:
         print("playlist songs failed:", e)
         return {"songs": [], "total": 0}, 300
-    return {"songs": songs, "total": total}, 3600          # cache for 1 hour
+    return {"songs": songs, "total": total}, 3600
 
 
 song_caches: dict[str, CachedValue] = {}
 
 @router.get("/playlists/{playlist_id}/songs")
 async def playlist_songs(playlist_id: str):
-    # only playlists that appear in your own public list can be requested
     allowed = {p["id"] for p in (await playlists_cache.get())["playlists"]}
     if playlist_id not in allowed:
         raise HTTPException(status_code=404)

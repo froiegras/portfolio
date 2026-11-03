@@ -10,6 +10,7 @@ import WidgetFrame from './components/Widgets/Widget/WidgetFrame';
 import { pages } from './pages';
 import { widgets } from './components/Widgets/registry';
 import { desktopItems } from './data/desktop';
+import { isMobile } from './utils/device';
 import hasWebGL from './utils/webgl';
 
 import './Home.css';
@@ -28,6 +29,8 @@ function shouldShowRoom() {
 
 function shouldBoot() {
   try {
+    if (new URLSearchParams(window.location.search).has('boot')) return true;   // ?boot still forces it
+    if (isMobile()) return false;                                               // new
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
     return sessionStorage.getItem('booted') !== '1';
   } catch {

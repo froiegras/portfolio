@@ -20,7 +20,7 @@
   display: flex;
   align-items: center;
   gap: 0.25rem;
-  overflow-x: auto;      /* scrolls sideways on small screens */
+  overflow-x: auto;
   min-width: 0;
 }
 
@@ -34,7 +34,7 @@
   color: rgb(var(--c-muted));
   white-space: nowrap;
 }
-.taskbar-date { display: none; }   /* hide date on phones */
+.taskbar-date { display: none; }
 
 .nav-button {
   display: flex;
@@ -73,5 +73,5 @@
   height: 1.5rem;
   display: block;
   object-fit: contain;
-  fill: currentColor;   /* takes the button's text color */
+  fill: currentColor;
 }
