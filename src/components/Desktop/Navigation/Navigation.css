@@ -61,6 +61,21 @@
   border-color: rgb(var(--c-accent) / 0.6);
 }
 
+@media (max-width: 767px) {
+  .taskbar-items button .label {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .taskbar-items button .emoji {
+    display: none;
+  }
+  .taskbar-items button .label {
+    display: inline;
+  }
+}
+
 @media (min-width: 768px) {
   .taskbar { padding: 0 1rem; }
   .taskbar-items { justify-content: center; gap: 0.5rem; }

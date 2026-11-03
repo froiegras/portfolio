@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Navigation.css';
 import Tray from '../../Desktop/Tray/Tray';
+import { isMobile } from '../../../utils/device';
 import ThemeToggle from '../../Desktop/ThemeToggle/ThemeToggle';
 import { ReactComponent as HomeIcon } from '../../../assets/home.svg';
 
@@ -15,10 +16,10 @@ function Navigation({ onNavItemClick, current, minimizedWidgets, onWidgetClick }
   }, []);
 
   const items = [
-    { key: 'interests', label: 'Interests' },
-    { key: 'skills', label: 'Skills' },
-    { key: 'work', label: 'Work Experience' },
-    { key: 'projects', label: 'Projects' },
+    { key: 'interests', label: 'Interests', emoji: '❤️' },
+    { key: 'skills', label: 'Skills', emoji: '🔧' },
+    { key: 'work', label: 'Work Experience', emoji: '💼' },
+    { key: 'projects', label: 'Projects', emoji: '👨‍💻' },
   ];
 
   const cls = (key) => `nav-button${current === key ? ' active' : ''}`;
@@ -30,14 +31,16 @@ function Navigation({ onNavItemClick, current, minimizedWidgets, onWidgetClick }
       </button>
 
       <div className="taskbar-items">
-        {items.map(({ key, label }) => (
+        {items.map(({ key, label, emoji }) => (
           <button
             key={key}
             data-nav-key={key}
             className={cls(key)}
             onClick={() => onNavItemClick(key)}
+            aria-label={label}
           >
-            {label}
+            <span className="emoji">{emoji}</span>
+            <span className="label">{label}</span>
           </button>
         ))}
       </div>

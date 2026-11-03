@@ -1,17 +1,15 @@
 // components/ReadmeFile/ReadmeFile.js
-import React from 'react';
 import { profile } from '../../data/profile';
 import './ReadmeFile.css';
 
-// Placeholder text: rewrite it in your own words.
 const text = (name) => `Hi, I'm ${name}.
 
-I'm a [what you do] from [where] who likes [one or two interests].
+I'm a software engineer who likes video games, music, and coding (only when it works).
 
 WHAT'S ON THIS COMPUTER
 -----------------------
-Taskbar   Interests, Skills, Education, Work, Projects
-Desktop   Playlists, Photos, this file, and the Recycle Bin
+Taskbar   Interests ❤️, Skills 🔧, Work 💼, Projects 👨‍💻
+Desktop   Playlists, Photos, this README, and the Recycle Bin
 Tray      Widgets for Profile, Spotify and Steam. Click one to minimize or restore it.
 
 TIPS
@@ -22,7 +20,11 @@ TIPS
 
 GET IN TOUCH
 ------------
-Email: you@example.com
+@froidfish
+@aluminumfroil
+@froiegras
+@sigmundfroi
+@frenchfrois
 `;
 
 export default function ReadmeFile() {

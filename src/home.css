@@ -42,6 +42,10 @@
   min-height: calc(100dvh - var(--taskbar-h) - 3rem);
 }
 
+.home-title {
+  font-family: var(--font-heading);
+}
+
 .widget-dock {
   display: flex;
   flex-direction: column;
