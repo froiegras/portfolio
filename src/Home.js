@@ -1,14 +1,14 @@
 // App.js
 import { useState, useCallback, Suspense, lazy } from 'react';
 
-import Folder from './components/Folder/Folder';
-import Navigation from './components/Navigation/Navigation';
-import DesktopIcon from './components/DesktopIcon/DesktopIcon';
-import BootScreen from './components/BootScreen/BootScreen';
-import WidgetFrame from './components/Widget/WidgetFrame';
+import Folder from './components/Desktop/Folder/Folder';
+import Navigation from './components/Desktop/Navigation/Navigation';
+import DesktopIcon from './components/Desktop/DesktopIcon/DesktopIcon';
+import BootScreen from './components/Desktop/BootScreen/BootScreen';
+import WidgetFrame from './components/Widgets/Widget/WidgetFrame';
 
 import { pages } from './pages';
-import { widgets } from './components/Widget/registry';
+import { widgets } from './components/Widgets/registry';
 import { desktopItems } from './data/desktop';
 import hasWebGL from './utils/webgl';
 
