@@ -9,7 +9,7 @@ CID = os.environ["SPOTIFY_CLIENT_ID"]
 SECRET = os.environ["SPOTIFY_CLIENT_SECRET"]
 REDIRECT = 'http://127.0.0.1:8080/callback'
 
-SCOPE = "user-read-currently-playing user-top-read"
+SCOPE = "user-read-currently-playing user-top-read playlist-read-private playlist-read-collaborative"
 
 result = {}
 
