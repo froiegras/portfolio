@@ -6,7 +6,7 @@ import { FrameContext } from './FrameContext';
 const reduceMotion = () =>
   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-export default function WidgetFrame({ id, minimized, onMinimize, className = '', children }) {
+export default function WidgetFrame({ id, minimized, onMinimize, position, onMove, className = '', children }) {
   const shellRef = useRef(null);
   const innerRef = useRef(null);
   const exitAnim = useRef(null);
@@ -85,6 +85,8 @@ export default function WidgetFrame({ id, minimized, onMinimize, className = '',
       cancel="a, button"
       bounds=".home-content"
       disabled={!isDesktop}
+      defaultPosition={isDesktop && position ? position : { x: 0, y: 0 }}
+      onStop={(e, data) => onMove?.({ x: data.x, y: data.y })}
     >
       <div ref={shellRef} className={`widget-shell ${className}`} hidden={hidden}>
         <div ref={innerRef}>

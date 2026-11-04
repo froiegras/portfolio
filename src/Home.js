@@ -43,6 +43,11 @@ function Home() {
   const [booting, setBooting] = useState(shouldBoot);
   const [minimized, setMinimized] = useState(() => new Set());
   const [phase, setPhase] = useState(() => (shouldShowRoom() ? 'room' : 'desktop'));
+  const [positions, setPositions] = useState({});
+
+  const handleMove = useCallback((key, pos) => {
+    setPositions((prev) => ({ ...prev, [key]: pos }));
+  }, []);
 
   const handleEnter = useCallback(() => {
   try {
@@ -98,7 +103,14 @@ function Home() {
 
           <div className="icon-grid mb-8">
             {desktopItems.map(({ id, label, icon }) => (
-              <DesktopIcon key={id} label={label} icon={icon} onOpen={() => setSelectedComponent(id)} />
+              <DesktopIcon
+                key={id}
+                label={label}
+                icon={icon}
+                onOpen={() => setSelectedComponent(id)}
+                position={positions[`icon:${id}`]}
+                onMove={(pos) => handleMove(`icon:${id}`, pos)}
+              />
             ))}
           </div>
         </div>
@@ -110,6 +122,8 @@ function Home() {
               id={id}
               minimized={minimized.has(id)}
               onMinimize={handleMinimizeWidget}
+              position={positions[`widget:${id}`]}
+              onMove={(pos) => handleMove(`widget:${id}`, pos)}
             >
               <Component />
             </WidgetFrame>
