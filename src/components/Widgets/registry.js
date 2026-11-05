@@ -6,7 +6,7 @@ import ObsessionWidget from './Widget/ObsessionWidget';
 
 export const widgets = [
   { id: 'profile', icon: '👤', label: 'Profile', Component: ProfileWidget },
+  { id: 'obsession', icon: '🔁', label: 'On repeat', Component: ObsessionWidget },
   { id: 'spotify', icon: '🎵', label: 'Spotify', Component: SpotifyWidget },
   { id: 'steam', icon: '🎮', label: 'Steam', Component: SteamWidget },
-  { id: 'obsession', icon: '🔁', label: 'On repeat', Component: ObsessionWidget },
 ];

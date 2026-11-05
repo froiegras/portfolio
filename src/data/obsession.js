@@ -5,7 +5,6 @@ import clip2 from '../assets/obsession/walkoff.webp';
 export const obsession = [
   {
     id: 'first',
-    label: 'On repeat',
     title: 'FIRESTARTER',
     subtitle: 'KDA',
     media: clip,
@@ -16,7 +15,6 @@ export const obsession = [
   },
   {
     id: 'second',
-    label: 'On repeat',
     title: 'FIRESTARTER',
     subtitle: 'KDA',
     media: clip2,
