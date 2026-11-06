@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Widget from '../Widget/Widget';
-import { obsession } from '../../../data/obsession';
 import './ObsessionWidget.css';
+import useObsessions from '../../../hooks/useObsessions';
 
-const AUTO_ROTATE_MS = 0;        // 8000 would advance every 8 seconds, and 0 turns it off
-const RANDOM_START = false;      // true starts on a random entry each visit
-const WHEEL_COOLDOWN_MS = 450;   // one scroll step per flick, since trackpads fire many events
-const SWIPE_MIN_PX = 40;         // how far a swipe must travel to count
-const DOTS_ON_MEDIA = true;      // false puts the dots below the clip again
+const AUTO_ROTATE_MS = 0;
+const RANDOM_START = false;
+const WHEEL_COOLDOWN_MS = 450;
+const SWIPE_MIN_PX = 40;
+const DOTS_ON_MEDIA = true;
 
 const isVideo = (src) => /\.(mp4|webm)$/i.test(src);
+const NONE = [];
 
-// reduced motion or "data saver": don't autoplay or rotate
 function wantsStill() {
   try {
     return (
@@ -24,6 +24,7 @@ function wantsStill() {
 }
 
 export default function ObsessionWidget({ className = '' }) {
+  const obsession = useObsessions() ?? NONE;
   const count = obsession.length;
   const [still] = useState(wantsStill);
   const [index, setIndex] = useState(() =>
@@ -36,23 +37,21 @@ export default function ObsessionWidget({ className = '' }) {
   const lastWheel = useRef(0);
   const touchStart = useRef(null);
 
-  // optional auto-advance, paused while the visitor hovers or focuses the widget
   useEffect(() => {
     if (!AUTO_ROTATE_MS || count < 2 || still || paused) return undefined;
     const timer = setInterval(() => setIndex((i) => (i + 1) % count), AUTO_ROTATE_MS);
     return () => clearInterval(timer);
   }, [count, still, paused]);
 
-  // mouse wheel or trackpad over the clip steps through the entries
   useEffect(() => {
     const el = frameRef.current;
     if (!el || count < 2) return undefined;
 
     const onWheel = (e) => {
-      if (e.ctrlKey) return;                                   // leave pinch-zoom alone
+      if (e.ctrlKey) return;
       const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
       if (Math.abs(delta) < 4) return;
-      e.preventDefault();                                      // needs a non-passive listener
+      e.preventDefault();
       const now = Date.now();
       if (now - lastWheel.current < WHEEL_COOLDOWN_MS) return;
       lastWheel.current = now;
@@ -71,7 +70,6 @@ export default function ObsessionWidget({ className = '' }) {
   const go = (delta) => setIndex((i) => (i + delta + count) % count);
   const markFailed = () => setFailed((prev) => new Set(prev).add(id));
 
-  // horizontal swipe on touch screens; vertical gestures still scroll the page
   const onTouchStart = (e) => {
     const t = e.touches[0];
     touchStart.current = { x: t.clientX, y: t.clientY };
@@ -144,7 +142,6 @@ export default function ObsessionWidget({ className = '' }) {
       >
         {visual}
 
-        {/* announces the new title to screen readers when the entry changes */}
         <span className="sr-only" aria-live={AUTO_ROTATE_MS ? 'off' : 'polite'}>{title}</span>
 
         {count > 1 && (
