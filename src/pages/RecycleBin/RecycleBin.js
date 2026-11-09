@@ -54,7 +54,7 @@ export default function RecycleBin() {
       <div className="trash-actions">
         <button
           disabled={!item}
-          onClick={() => setMessage(`Restoring ${item.name}… failed: file is too embarrassing.`)}
+          onClick={() => setMessage(`Restoring ${item.name}… failed: folder is too embarrassing.`)}
         >
           Restore
         </button>

@@ -14,7 +14,7 @@ export default function MobileDock({ current, onOpen, onHome }) {
           <button
             key={key}
             className={`m-dock-item${active ? ' active' : ''}`}
-            onClick={() => (active ? onHome() : onOpen(key))}   // tapping the open one returns home
+            onClick={() => (active ? onHome() : onOpen(key))}
             aria-current={active ? 'page' : undefined}
           >
             <span className="m-dock-icon" aria-hidden="true">{icon}</span>
