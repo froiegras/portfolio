@@ -8,8 +8,8 @@ export const profile = {
   birthDay: 15,
 
   details: [
-    { label: 'Height', value: '169cm w/o shoes' },
-    { label: 'Weight', value: '85(?)kg' },
+    { label: 'Height', value: '169cm' },
+    { label: 'Weight', value: '85kg' },
     { label: 'Occupation', value: 'Software Engineer' },
     { label: 'Languages', value: 'English, Filipino' },
   ],

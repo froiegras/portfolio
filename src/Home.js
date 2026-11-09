@@ -6,6 +6,8 @@ import Navigation from './components/Desktop/Navigation/Navigation';
 import DesktopIcon from './components/Desktop/DesktopIcon/DesktopIcon';
 import BootScreen from './components/Desktop/BootScreen/BootScreen';
 import WidgetFrame from './components/Widgets/Widget/WidgetFrame';
+import MobileShell from './components/Mobile/MobileShell';
+import useIsDesktop from './hooks/useIsDesktop';
 
 import { pages } from './pages';
 import { widgets } from './components/Widgets/registry';
@@ -44,18 +46,19 @@ function Home() {
   const [minimized, setMinimized] = useState(() => new Set());
   const [phase, setPhase] = useState(() => (shouldShowRoom() ? 'room' : 'desktop'));
   const [positions, setPositions] = useState({});
+  const isDesktop = useIsDesktop();
 
   const handleMove = useCallback((key, pos) => {
     setPositions((prev) => ({ ...prev, [key]: pos }));
   }, []);
 
   const handleEnter = useCallback(() => {
-  try {
-    sessionStorage.setItem('entered', '1');
-  } catch {
-  }
-  setPhase('desktop');
-}, []);
+    try {
+      sessionStorage.setItem('entered', '1');
+    } catch {
+    }
+    setPhase('desktop');
+  }, []);
 
   const setWidgetMinimized = useCallback((id, value) => {
     setMinimized((prev) => {
@@ -92,6 +95,16 @@ function Home() {
 
   const handleCloseFolder = () => {
     setSelectedComponent('home');
+  };
+
+  if (!isDesktop) {
+  return (
+      <MobileShell
+        current={selectedComponent}
+        onOpen={handleNavItemClick}
+        onHome={handleCloseFolder}
+      />
+    );
   };
 
   const renderContent = () => {
