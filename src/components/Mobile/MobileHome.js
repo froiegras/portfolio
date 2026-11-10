@@ -27,7 +27,7 @@ export default function MobileHome({ onOpen }) {
   return (
     <div className="m-home">
       <header className="m-home-head">
-        <h1 className="m-home-title">Welcome to My Portfolio</h1>
+        <h1 className="m-home-title">Welcome to Froi Land! ~ (˵•̀ᴗ - ˵ )</h1>
         <ThemeToggle />
       </header>
 

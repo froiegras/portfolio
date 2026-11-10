@@ -112,8 +112,6 @@ function Home() {
     return (
       <div className="home-content p-2">
         <div className="home-main">
-          <h1 className="text-3xl font-bold mb-2 home-title">Hello |˶˙ᵕ˙ )ﾉﾞit's me Froi</h1>
-
           <div className="icon-grid mb-8">
             {desktopItems.map(({ id, label, icon }) => (
               <DesktopIcon
