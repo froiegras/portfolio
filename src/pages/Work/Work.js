@@ -59,9 +59,10 @@ const jobs = [
     location: 'Remote',
     summary: 'Automating settlements and reports for Rivvy\'s internal operations.',
     bullets: [
-      'Automated settlements and email reports for Rivvy\'s internal operations'
+      'Automated settlements and email reports for Rivvy\'s internal operations',
+      'Assisted on an in-house OCR solution'
     ],
-    tech: ['Python', 'Golang', 'PostgreSQL', 'Redis', 'ssh', 'Git'],
+    tech: ['Python', 'Golang', 'PostgreSQL', 'Redis', 'ssh', 'Git', 'Github Actions', 'Docker', 'OpenCV', 'Tesseract'],
   },
 ];
 

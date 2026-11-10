@@ -7,7 +7,14 @@ The current "widgets" I have on the home screen:
 - **Last Played/Now Playing**: Connected to Spotify for Now Playing and Youtube Music for Last Played.
 - **Personal Information**: It reads the data in `profile.js` and displays it as personal information, including social through icons
 - **Steam Last Played**: Connected to Steam API to fetch the last played game in Steam
-- **Black List(?)**: *coming soon*
+- **Current Obsession**: Displays gifs/media that is currently replaying in my mind.
+
+## Desktop
+Some *folders* that can be accessed:
+- **Playlists**: fetches my created Spotify playlist.
+- **Photos**: contains the entire photo collection, organized through categories.
+- **README.txt**: A summary of me and what you can expect from this portfolio.
+- **Recycle Bin**: Things that I wish I can chuck down the drain.
 
 ## Interests
  contains categories that I have interest in such as:
