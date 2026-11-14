@@ -7,6 +7,7 @@ import {
   FaYoutube,
 } from 'react-icons/fa6';
 import Widget from './Widget';
+import Tooltip from '../../Shared/Tooltip/Tooltip';
 import { profile } from '../../../data/profile';
 import './ProfileWidget.css';
 
@@ -50,10 +51,12 @@ export default function ProfileWidget({ className = '' }) {
 
       {rows.length > 0 && (
         <dl className="profile-details">
-          {rows.map(({ label, value }) => (
+          {rows.map(({ label, value, hint }) => (
             <div key={label}>
               <dt>{label}</dt>
-              <dd>{value}</dd>
+              <dd>
+                <Tooltip text={hint}>{value}</Tooltip>
+              </dd>
             </div>
           ))}
         </dl>

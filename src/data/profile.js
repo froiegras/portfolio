@@ -9,9 +9,9 @@ export const profile = {
 
   details: [
     { label: 'Height', value: '169cm' },
-    { label: 'Weight', value: '85kg' },
-    { label: 'Occupation', value: 'Software Engineer' },
-    { label: 'Languages', value: 'English, Filipino' },
+    { label: 'Weight', value: '85kg', hint: 'I\'m not sure, I haven\'t checked in a while' },
+    { label: 'Occupation', value: 'Software Engineer', hint: 'Let\'s be honest, I\'m a vibe coder atp' },
+    { label: 'Languages', value: 'English, Filipino', hint: 'I tried to learn Korean and Ilokano but I just couldn\'t keep up' },
   ],
 
   socials: [
