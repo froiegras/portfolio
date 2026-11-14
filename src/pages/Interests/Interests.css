@@ -180,3 +180,5 @@
 @media (pointer: coarse) {
   .log-photo-btn { min-width: 2.25rem; min-height: 2.25rem; }
 }
+
+.interest-game-icon.riot-icon { width: 1.5rem; height: 1.5rem; border-radius: 4px; vertical-align: -0.4em; }

@@ -5,6 +5,7 @@ import SteamTopGames from './SteamTopGames';
 import SpotifyTopTracks from './SpotifyTopTracks';
 import GithubRepoList from './GithubRepoList';
 import ActivityLog from './ActivityLog';
+import RiotTopChampions from './RiotTopChampions';
 import YouTubeMusicRecent from './YoutubeMusicRecent';
 import { trails } from '../../data/trails';
 import { generated as rides } from '../../data/rides.generated';
@@ -47,6 +48,12 @@ const interests = [
       { label: 'Euro Truck Simulator 2' },
     ],
     steam: true,
+    riot: {
+      caption: 'League of Legends: Top Champions by Mastery',
+      fallback: [
+        { label: 'Your champion', note: 'main' },
+      ],
+    },
   },
   {
     id: 'sports',
@@ -86,13 +93,14 @@ const interests = [
 ];
 
 function InterestPanel({ item, onNavigate }) {
-  const { summary, items, steam, spotify, ytmusic, github, log, gallery, link, children } = item;
+  const { summary, items, steam, riot, spotify, ytmusic, github, log, gallery, link, children } = item;
 
   return (
     <>
       {summary && <p className="subtext">{summary}</p>}
 
       {steam && <SteamTopGames fallback={items} />}
+      {riot && <RiotTopChampions {...riot} />}
 
       {spotify?.map(({ key, caption }, i) => (
         <SpotifyTopTracks
