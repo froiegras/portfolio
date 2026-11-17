@@ -11,6 +11,7 @@ import { trails } from '../../data/trails';
 import { generated as rides } from '../../data/rides.generated';
 import Icons from '../../components/Shared/Icons/Icons';
 import './Interests.css';
+import Tooltip from '../../components/Shared/Tooltip/Tooltip';
 
 const interests = [
   {
@@ -25,6 +26,7 @@ const interests = [
     ],
     github: true,
     link: { text: 'See my projects', page: 'projects' },
+    note: `If the code doesn't work. I live by the quote from a Stack overflow reply: "Burning sand in a cup shouting"`
   },
   {
     id: 'kpop',
@@ -37,6 +39,20 @@ const interests = [
       { key: 'kpop', caption: 'Most played K-pop overall (past year)' },
     ],
     ytmusic: { caption: 'Recently played on YouTube Music', only: ['TWICE'] },
+    note: `
+    ⠀⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠀⠀⠀⠀⠀
+    ⣠⣴⢟⣶⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣴⣾⠀⠀⠀⠀⠀
+    ⠀⠾⠋⠙⠂⢀⣠⣴⣶⣶⣶⣾⣿⣿⣟⣹⣾⠇⠀⠀⠀⠀⠀
+    ⠀⠀⠀⢠⣶⣿⠿⠿⣿⣿⢿⡻⢿⡟⠿⠟⠁⠀⠀⠀⠀⠀⠀
+    ⠀⠀⣰⡟⠁⠀⠀⣸⣿⣿⡿⠀⠀⠀⠀⠀⣀⡀⢀⡀⠀⠀⠀
+    ⠀⢰⣿⡅⠀⠀⠀⣾⣿⣷⠁⠀⠀⠀⠀⢿⣿⣿⣮⣿⠂⠀⠀
+    ⠀⢸⣿⣿⣄⠀⢠⣿⣿⠇⢠⣿⣿⣿⡄⠀⣿⣿⡏⠀⠀⠀⠀
+    ⠀⠈⠛⠋⠀⠀⢸⣿⣿⠀⢾⣿⢩⣿⠇⠀⣿⣿⠏⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠸⣿⣿⡀⠘⣿⣾⠏⠁⣰⣿⡟⠀⠀⢀⡀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠙⠿⣿⡶⠟⢿⣶⣾⡿⠋⠀⣯⠚⢹⡀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠲⡴⠊⠁
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠁⠀⠀
+    `
   },
   {
     id: 'games',
@@ -55,6 +71,7 @@ const interests = [
         { label: 'Your champion', note: 'main' },
       ],
     },
+    note: `I was thinking (•⤙•) of adding other games but API support is limited especially gacha games (¬_¬ ), like Genshin`,
   },
   {
     id: 'sports',
@@ -166,7 +183,7 @@ function Accordion({ items, onNavigate, nested = false }) {
             >
               <span className="interest-chevron" aria-hidden="true">▸</span>
               <span className="interest-icon" aria-hidden="true">{item.icon ? <Icons name={item.icon} /> : <Icons name="default" />}</span>
-              <span className="interest-name">{item.name}</span>
+              <span className="interest-name"><Tooltip text={item.note}>{item.name}</Tooltip></span>
             </button>
 
             <div id={`panel-${item.id}`} className="interest-panel">
