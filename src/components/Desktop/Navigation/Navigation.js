@@ -18,7 +18,6 @@ function Navigation({ onNavItemClick, current, minimizedWidgets, onWidgetClick }
   const items = [
     { key: 'interests', label: 'Interests', emoji: '❤️' },
     { key: 'skills', label: 'Skills', emoji: '🔧' },
-    { key: 'work', label: 'Work Experience', emoji: '💼' },
     { key: 'projects', label: 'Projects', emoji: '👨‍💻' },
   ];
 

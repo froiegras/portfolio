@@ -1,7 +1,7 @@
 const DOCK = [
   { key: 'interests', icon: '⭐', label: 'Interests' },
   { key: 'skills', icon: '🛠️', label: 'Skills' },
-  { key: 'work', icon: '💼', label: 'Work' },
+  { key: 'resume', icon: '💼', label: 'Resume' },
   { key: 'projects', icon: '🚀', label: 'Projects' },
 ];
 
