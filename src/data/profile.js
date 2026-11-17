@@ -1,7 +1,7 @@
 // src/data/profile.js
 export const profile = {
   name: 'Froi',
-  avatar: '👤',
+  avatar: 'user',
 
   birthYear: 2001,
   birthMonth: 4,

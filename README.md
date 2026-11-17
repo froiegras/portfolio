@@ -27,3 +27,6 @@ Some *folders* that can be accessed:
 - Sports
     - contains logs, information and galleries for sports I have taken interests in.
 
+## Icons, Wallpapers, and Assets
+- Icons were taken from [Flaticon](https://www.flaticon.com/)
+- Wallpapers were taken from [@pogzilla1](https://x.com/pogzilla1) on X/Twitter

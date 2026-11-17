@@ -1,9 +1,7 @@
-// Navigation.js
 import React from 'react';
 import PropTypes from 'prop-types';
 import './Navigation.css';
 import Tray from '../../Desktop/Tray/Tray';
-import { isMobile } from '../../../utils/device';
 import ThemeToggle from '../../Desktop/ThemeToggle/ThemeToggle';
 import { ReactComponent as HomeIcon } from '../../../assets/home.svg';
 

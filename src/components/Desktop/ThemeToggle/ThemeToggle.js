@@ -1,9 +1,8 @@
-// components/ThemeToggle/ThemeToggle.js
-import React from 'react';
 import useTheme from '../../../hooks/useTheme';
 import './ThemeToggle.css';
+import Icon from '../../Shared/Icons/Icons';
 
-const ICONS = { auto: '🌗', light: '☀️', dark: '🌙' };
+const ICONS = { auto: 'night-day', light: 'sun', dark: 'moon' };
 const NAMES = { auto: 'Auto (by time of day)', light: 'Light', dark: 'Dark' };
 
 export default function ThemeToggle() {
@@ -12,7 +11,7 @@ export default function ThemeToggle() {
 
   return (
     <button className="theme-toggle" onClick={cycle} aria-label={label} title={label}>
-      <span aria-hidden="true">{ICONS[pref]}</span>
+      <Icon name={ICONS[pref]} />
     </button>
   );
 }

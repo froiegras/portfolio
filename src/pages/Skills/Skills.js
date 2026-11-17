@@ -1,18 +1,28 @@
 // Skills.js
 import React, { useState } from 'react';
 import './Skills.css';
+import {
+  SiPython,
+  SiReact,
+  SiNextdotjs,
+  SiSolid,
+  SiTailwindcss,
+  SiPostgresql,
+  SiRedis,
+  SiGo,
+  SiMongodb,
+} from 'react-icons/si';
 
 const skills = [
-  { name: 'Python', icon: '🐍', type: 'Language', level: 4 },
-  { name: 'Golang', icon: '🐹', type: 'Language', level: 3 },
-  { name: 'ReactJS', icon: '⚛️', type: 'Frontend', level: 4 },
-  { name: 'NextJS', icon: '▲', type: 'Frontend', level: 3 },
-  { name: 'SolidJS', icon: '🔷', type: 'Frontend', level: 3 },
-  { name: 'TailwindCSS', icon: '🎨', type: 'Frontend', level: 3 },
-  { name: 'PostgreSQL', icon: '🐘', type: 'Database', level: 3 },
-  { name: 'Redis', icon: '🧰', type: 'Database', level: 3 },
-  { name: 'SSH', icon: '🔑', type: 'Tools', level: 2 },
-  { name: 'MongoDB', icon: '🍃', type: 'Database', level: 2 },
+  { name: 'Python', icon: SiPython, type: 'Language', level: 4 },
+  { name: 'Golang', icon: SiGo, type: 'Language', level: 3 },
+  { name: 'ReactJS', icon: SiReact, type: 'Frontend', level: 4 },
+  { name: 'NextJS', icon: SiNextdotjs, type: 'Frontend', level: 3 },
+  { name: 'SolidJS', icon: SiSolid, type: 'Frontend', level: 3 },
+  { name: 'TailwindCSS', icon: SiTailwindcss, type: 'Frontend', level: 3 },
+  { name: 'PostgreSQL', icon: SiPostgresql, type: 'Database', level: 3 },
+  { name: 'Redis', icon: SiRedis, type: 'Database', level: 3 },
+  { name: 'MongoDB', icon: SiMongodb, type: 'Database', level: 2 },
 ];
 
 const LEVEL_LABELS = ['', 'Beginner', 'Learning', 'Comfortable', 'Proficient', 'Expert'];
@@ -46,10 +56,10 @@ function Skills() {
           <span role="columnheader">Level</span>
         </div>
 
-        {visible.map(({ name, icon, type, level }) => (
+        {visible.map(({ name, icon: SkillIcon, type, level }) => (
           <div className="skills-row" role="row" key={name}>
             <span className="skills-name" role="cell">
-              <span aria-hidden="true">{icon}</span> {name}
+              {SkillIcon && <SkillIcon className="skill-icon" aria-hidden="true" />} {name}
             </span>
             <span className="skills-col-type" role="cell">{type}</span>
             <span

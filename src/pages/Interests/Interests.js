@@ -9,12 +9,13 @@ import RiotTopChampions from './RiotTopChampions';
 import YouTubeMusicRecent from './YoutubeMusicRecent';
 import { trails } from '../../data/trails';
 import { generated as rides } from '../../data/rides.generated';
+import Icons from '../../components/Shared/Icons/Icons';
 import './Interests.css';
 
 const interests = [
   {
     id: 'coding',
-    icon: '💻',
+    icon: 'computer',
     name: 'Coding.exe',
     summary: 'Making fun Discord bots and scripts that make my life easier.',
     items: [
@@ -39,7 +40,7 @@ const interests = [
   },
   {
     id: 'games',
-    icon: '🎮',
+    icon: 'controller',
     name: 'Video Games.exe',
     summary: 'Mostly co-op and action games.',
     items: [
@@ -57,13 +58,13 @@ const interests = [
   },
   {
     id: 'sports',
-    icon: '🏅',
+    icon: 'trophy',
     name: 'Sports.json',
     summary: 'Anything outdoors and active.',
     children: [
       {
         id: 'frisbee',
-        icon: '🥏',
+        icon: 'frisbee',
         name: 'Frisbee.py',
         summary: 'My favorite sport.',
         items: [
@@ -74,7 +75,7 @@ const interests = [
       },
       {
         id: 'biking',
-        icon: '🚴',
+        icon: 'bike',
         name: 'Biking.exe',
         summary:'Casual rides from time to time.',
         log: { rows: rides, label: 'Ride', noun: 'rides' },
@@ -82,7 +83,7 @@ const interests = [
       },
       {
         id: 'hiking',
-        icon: '🥾',
+        icon: 'hiking',
         name: 'Hiking.png',
         summary: 'I like waking up early to walk up a mountain /s',
         log: { rows: trails, label: 'Trail', noun: 'hikes', albums: 'hiking' },
@@ -164,7 +165,7 @@ function Accordion({ items, onNavigate, nested = false }) {
               aria-controls={`panel-${item.id}`}
             >
               <span className="interest-chevron" aria-hidden="true">▸</span>
-              <span className="interest-icon" aria-hidden="true">{item.icon}</span>
+              <span className="interest-icon" aria-hidden="true">{item.icon ? <Icons name={item.icon} /> : <Icons name="default" />}</span>
               <span className="interest-name">{item.name}</span>
             </button>
 

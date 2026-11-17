@@ -1,11 +1,12 @@
 // Projects.js
 import './Projects.css';
 import GithubRepos from './GithubRepos';
+import Icons from '../../components/Shared/Icons/Icons';
 
 const projects = [
   {
     id: 'api-integration',
-    icon: '🔌',
+    icon: 'plug',
     name: 'Third Party API Integration',
     kind: 'Work Project',
     summary: 'Integrated an external payment gateway API into company gateway.',
@@ -19,7 +20,7 @@ const projects = [
   },
   {
     id: 'thesis',
-    icon: '📄',
+    icon: 'document',
     name: 'Thesis',
     kind: 'Academic Project',
     summary: 'Effectiveness of Using Fundus Image Data Containing Other Retinal Diseases in Identifying Age-Related Macular Degeneration using Image Classification ',
@@ -42,7 +43,7 @@ function Projects() {
           return (
             <article key={id} className="project-card">
               <header className="project-head">
-                <span className="project-icon" aria-hidden="true">{icon}</span>
+                <span className="project-icon" aria-hidden="true"><Icons name={icon} /></span>
                 <div>
                   <h2 className="project-text">{name}</h2>
                   <span className="project-kind">{kind}</span>

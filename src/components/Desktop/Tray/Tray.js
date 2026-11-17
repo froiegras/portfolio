@@ -1,6 +1,5 @@
-// components/Tray/Tray.js
-import React from 'react';
 import { widgets } from '../../Widgets/registry';
+import Icon from '../../Shared/Icons/Icons';
 import './Tray.css';
 
 export default function Tray({ minimized, onWidgetClick }) {
@@ -18,7 +17,7 @@ export default function Tray({ minimized, onWidgetClick }) {
               aria-pressed={!isMin}
               title={`${label}: click to ${isMin ? 'restore' : 'minimize'}`}
             >
-              <span aria-hidden="true">{icon}</span>
+              <Icon name={icon} size="1rem" />
             </button>
           </li>
         );

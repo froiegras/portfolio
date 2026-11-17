@@ -14,10 +14,10 @@ export default function ResumeFile() {
         <span className="resume-name">{DOWNLOAD_NAME}</span>
         <div className="resume-actions">
           <a className="resume-btn primary" href={RESUME_URL} download={DOWNLOAD_NAME}>
-            ⬇ Download PDF
+            Download PDF
           </a>
           <a className="resume-btn" href={RESUME_URL} target="_blank" rel="noreferrer">
-            Open in new tab ↗
+            Open in new tab
           </a>
         </div>
       </div>

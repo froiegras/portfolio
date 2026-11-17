@@ -1,4 +1,5 @@
 import { useRef, useState, useLayoutEffect } from 'react';
+import Icon from '../../Shared/Icons/Icons';
 import './Folder.css';
 
 const reduceMotion = () =>
@@ -92,7 +93,7 @@ function Folder({ children, title, onClose, originKey }) {
       aria-label={title || 'Folder'}
     >
       <header className="window-titlebar">
-        <span className="window-title">📁 {title || 'Folder'}</span>
+        <span className="window-title"><Icon name="folder" /> {title}</span>
         <div className="window-controls">
           <button className="topbar-buttons minimize hidden md:flex" onClick={handleClose} aria-label="Minimize">-</button>
           <button

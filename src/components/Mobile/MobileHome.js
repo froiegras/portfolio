@@ -1,8 +1,8 @@
 import ThemeToggle from '../Desktop/ThemeToggle/ThemeToggle';
 import { widgets } from '../Widgets/registry';
 import { desktopItems } from '../../data/desktop';
+import Icon from '../Shared/Icons/Icons';
 
-// widgets listed together share one slide and are stacked; the ids must match registry.js
 const SLIDES = [
   ['profile'],
   ['obsession', 'spotify', 'steam'],
@@ -50,7 +50,7 @@ export default function MobileHome({ onOpen }) {
         {desktopItems.map(({ id, label, icon }) => (
           <li key={id}>
             <button className="m-app-icon" onClick={() => onOpen(id)}>
-              <span className="m-app-icon-img" aria-hidden="true">{icon}</span>
+              <span className="m-app-icon-img" aria-hidden="true"><Icon name={icon} /></span>
               <span>{label}</span>
             </button>
           </li>
