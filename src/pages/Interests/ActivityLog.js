@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Gallery from '../../components/Shared/Gallery/Gallery';
+import Icon from '../../components/Shared/Icons/Icons';
 
 const fmtDate = (iso) =>
   new Date(iso).toLocaleDateString(undefined, {
@@ -87,7 +88,7 @@ export default function ActivityLog({ rows, label = 'Trail', noun = 'activities'
                             aria-label={`${isOpen ? 'Hide' : 'Show'} photos of ${r.name}`}
                             title="Photos"
                           >
-                            📷
+                            <Icon name={'camera'} />
                           </button>
                         )}
                       </span>

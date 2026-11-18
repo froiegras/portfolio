@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Widget from '../Widget/Widget';
 import { getLastPlayed } from '../../../api/steam';
 import './SteamWidget.css';
-import Icons from '../../Shared/Icons/Icons';
+import Icon from '../../Shared/Icons/Icons';
 
 const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
 
@@ -42,7 +42,7 @@ export default function SteamWidget({ className = '' }) {
   const playingNow = Boolean(game?.inGame);
 
   return (
-    <Widget title={<><Icons name="controller" /> Now Playing</>} className={className}>
+    <Widget title={<><Icon name="controller" /> Now Playing</>} className={className}>
       {game?.found ? (
         <a className="steam-row" href={game.url} target="_blank" rel="noreferrer">
           <img src={game.image} alt="" className="steam-art" loading="lazy" />

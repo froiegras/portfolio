@@ -10,7 +10,7 @@ import Widget from './Widget';
 import Tooltip from '../../Shared/Tooltip/Tooltip';
 import { profile } from '../../../data/profile';
 import './ProfileWidget.css';
-import Icons from '../../Shared/Icons/Icons';
+import Icon from '../../Shared/Icons/Icons';
 
 const ICONS = {
   instagram: FaInstagram,
@@ -35,13 +35,13 @@ export default function ProfileWidget({ className = '' }) {
   ];
 
   return (
-    <Widget title={<><Icons name="user" /> Profile</>} className={className}>
+    <Widget title={<><Icon name="user" /> Profile</>} className={className}>
       <div className="profile-head">
         <div className="profile-avatar">
           {avatar?.startsWith('/') ? (
             <img src={avatar} alt="" />
           ) : (
-            <Icons name={avatar} size="1.25rem" />
+            <Icon name={avatar} size="1.25rem" />
           )}
         </div>
         <div>

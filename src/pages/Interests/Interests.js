@@ -9,7 +9,7 @@ import RiotTopChampions from './RiotTopChampions';
 import YouTubeMusicRecent from './YoutubeMusicRecent';
 import { trails } from '../../data/trails';
 import { generated as rides } from '../../data/rides.generated';
-import Icons from '../../components/Shared/Icons/Icons';
+import Icon from '../../components/Shared/Icons/Icons';
 import './Interests.css';
 import Tooltip from '../../components/Shared/Tooltip/Tooltip';
 
@@ -30,7 +30,7 @@ const interests = [
   },
   {
     id: 'kpop',
-    icon: '🍭',
+    icon: 'candy',
     name: 'Kpop.mp4',
     summary: 'Especially TWICE.',
     items: [{ label: 'TWICE', note: 'my favorite group' }],
@@ -58,7 +58,7 @@ const interests = [
     id: 'games',
     icon: 'controller',
     name: 'Video Games.exe',
-    summary: 'Mostly co-op and action games.',
+    summary: 'I play anything that interests me, I currently play Apex Legends and League of Legends (ARAM) but Ive also played Stardew Valley for a week back in the pandemic. Ive also played Genshin Impact since release.',
     items: [
       { label: 'Monster Hunter World / Wilds' },
       { label: 'Apex Legends' },
@@ -182,7 +182,7 @@ function Accordion({ items, onNavigate, nested = false }) {
               aria-controls={`panel-${item.id}`}
             >
               <span className="interest-chevron" aria-hidden="true">▸</span>
-              <span className="interest-icon" aria-hidden="true">{item.icon ? <Icons name={item.icon} /> : <Icons name="default" />}</span>
+              <span className="interest-icon" aria-hidden="true">{item.icon ? <Icon name={item.icon} /> : <Icon name="default" />}</span>
               <span className="interest-name"><Tooltip text={item.note}>{item.name}</Tooltip></span>
             </button>
 

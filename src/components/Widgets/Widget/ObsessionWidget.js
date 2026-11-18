@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Widget from '../Widget/Widget';
 import './ObsessionWidget.css';
 import useObsessions from '../../../hooks/useObsessions';
-import Icons from '../../Shared/Icons/Icons';
+import Icon from '../../Shared/Icons/Icons';
 
 const AUTO_ROTATE_MS = 0;
 const RANDOM_START = false;
@@ -123,11 +123,11 @@ export default function ObsessionWidget({ className = '' }) {
 
   const headerTitle = link ? (
     <a href={link} target="_blank" rel="noreferrer" className="obs-header-link">
-      <Icons name="refresh" /> {title}
+      <Icon name="refresh" /> {title}
     </a>
   ) : (
     <>
-      <Icons name="refresh" /> {title}
+      <Icon name="refresh" /> {title}
     </>
   );
 

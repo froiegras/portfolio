@@ -4,7 +4,7 @@ import Widget from '../Widget/Widget';
 import { getNowPlaying } from '../../../api/spotify';
 import './SpotifyWidget.css';
 import { getRecentlyPlayed } from '../../../api/ytmusic';
-import Icons from '../../Shared/Icons/Icons';
+import Icon from '../../Shared/Icons/Icons';
 
 export default function SpotifyWidget({ className = '' }) {
   let body, title;
@@ -42,7 +42,7 @@ export default function SpotifyWidget({ className = '' }) {
   }, []);
 
   if (track?.isPlaying) {
-    title = <><Icons name="music" /> Now Playing</>;
+    title = <><Icon name="music" /> Now Playing</>;
     body = (
       <div className="spotify-row">
         {track.albumImage && (
@@ -65,7 +65,7 @@ export default function SpotifyWidget({ className = '' }) {
       </div>
     );
   } else if (last) {
-    title = <><Icons name="music" /> Last Played</>;
+    title = <><Icon name="music" /> Last Played</>;
     body = (
       <a className="spotify-last" href={last.url} target="_blank" rel="noreferrer">
         <span className="spotify-last-label">Last played on YouTube Music</span>
@@ -74,7 +74,7 @@ export default function SpotifyWidget({ className = '' }) {
       </a>
     );
   } else {
-    title = <><Icons name="music" /> Now Playing</>;
+    title = <><Icon name="music" /> Now Playing</>;
     body = <div className="spotify-idle">Not playing anything right now</div>;
   }
 

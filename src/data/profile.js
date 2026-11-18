@@ -1,4 +1,3 @@
-// src/data/profile.js
 export const profile = {
   name: 'Froi',
   avatar: 'user',

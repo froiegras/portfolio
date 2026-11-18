@@ -1,21 +1,19 @@
-// components/Photos/Photos.js
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Gallery from '../../components/Shared/Gallery/Gallery';
 import { photoSections } from '../../data/photoSections';
 import './Photos.css';
-import Icons from '../../components/Shared/Icons/Icons';
+import Icon from '../../components/Shared/Icons/Icons';
 
-// 'mt-example-2025' -> 'Mt Example 2025'
 const pretty = (slug) => slug.replace(/[-_]+/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 
 function Cover({ src, fallback }) {
   const [failed, setFailed] = useState(!src);
-  if (failed) return <Icons name={fallback} />;
+  if (failed) return <Icon name={fallback} />;
   return <img src={src} alt="" loading="lazy" onError={() => setFailed(true)} />;
 }
 
 export default function Photos() {
-  const [albums, setAlbums] = useState(null);      // null while loading
+  const [albums, setAlbums] = useState(null);
   const [open, setOpen] = useState(null);
 
   useEffect(() => {

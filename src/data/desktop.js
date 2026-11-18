@@ -1,4 +1,3 @@
-// src/data/desktop.js
 export const desktopItems = [
   { id: 'playlists', label: 'Playlists', icon: 'playlist' },
   { id: 'photos', label: 'Photos', icon: 'picture' },

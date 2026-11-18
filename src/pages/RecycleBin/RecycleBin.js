@@ -1,7 +1,8 @@
 // components/RecycleBin/RecycleBin.js
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { trashItems } from '../../data/trash';
 import './RecycleBin.css';
+import Icon from '../../components/Shared/Icons/Icons';
 
 export default function RecycleBin() {
   const [selectedId, setSelectedId] = useState(trashItems[0]?.id ?? null);
@@ -33,7 +34,7 @@ export default function RecycleBin() {
                     onClick={() => select(t.id)}
                     aria-pressed={t.id === selectedId}
                   >
-                    <span aria-hidden="true">{t.icon} </span>{t.name}
+                    <Icon icon={t.icon} /> {t.name}
                   </button>
                 </td>
                 <td className="trash-hide-sm">{t.from}</td>

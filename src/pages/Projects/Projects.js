@@ -1,7 +1,7 @@
 // Projects.js
 import './Projects.css';
 import GithubRepos from './GithubRepos';
-import Icons from '../../components/Shared/Icons/Icons';
+import Icon from '../../components/Shared/Icons/Icons';
 
 const projects = [
   {
@@ -43,7 +43,7 @@ function Projects() {
           return (
             <article key={id} className="project-card">
               <header className="project-head">
-                <span className="project-icon" aria-hidden="true"><Icons name={icon} /></span>
+                <span className="project-icon" aria-hidden="true"><Icon name={icon} /></span>
                 <div>
                   <h2 className="project-text">{name}</h2>
                   <span className="project-kind">{kind}</span>

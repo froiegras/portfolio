@@ -1,5 +1,3 @@
-// src/data/playlists.js
-// Replace the placeholder IDs with your own. Groups and names are up to you.
 export const playlistGroups = [
   {
     id: 'kpop',
@@ -9,7 +7,7 @@ export const playlistGroups = [
         id: 'YOUR_PLAYLIST_ID',
         name: 'TWICE essentials',
         description: 'The ones I keep coming back to',
-        cover: '',     // optional: an image path like '/assets/covers/twice.webp'
+        cover: '',
       },
     ],
   },

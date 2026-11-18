@@ -1,4 +1,3 @@
-// src/data/trails.js
 export const trails = [
   { name: 'Mt. Batolusong', date: '2024-12-07', km: 8.5, gain: 580, difficulty: '3/9 daw', note: 'MALAYO NA PERO MALAYO PA MARE',  album: 'batolusong-2025'},
   { name: 'Mt. Ulap', date: '2025-01-18', km: 9.4, gain: 1846, difficulty: '3/9', note: 'Picture muna tayo...',  album: 'ulap-2025' },
