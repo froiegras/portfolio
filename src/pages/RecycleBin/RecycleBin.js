@@ -34,7 +34,7 @@ export default function RecycleBin() {
                     onClick={() => select(t.id)}
                     aria-pressed={t.id === selectedId}
                   >
-                    <Icon icon={t.icon} /> {t.name}
+                    <Icon name={t.icon} size="1rem" /> {t.name}
                   </button>
                 </td>
                 <td className="trash-hide-sm">{t.from}</td>
