@@ -61,6 +61,26 @@
   border-color: rgb(var(--c-accent) / 0.6);
 }
 
+.nav-logout {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.125rem;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 0.375rem;
+  color: rgb(var(--c-muted));
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.nav-logout:hover {
+  background: rgb(var(--c-surface-2));
+  color: rgb(var(--c-fg));
+  border-color: rgb(var(--c-line));
+}
+
 @media (max-width: 767px) {
   .taskbar-items button .label {
     display: none;

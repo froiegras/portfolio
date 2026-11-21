@@ -1,4 +1,3 @@
-// App.js
 import { useState, useCallback, Suspense, lazy } from 'react';
 
 import Folder from './components/Desktop/Folder/Folder';
@@ -18,6 +17,15 @@ import hasWebGL from './utils/webgl';
 import './Home.css';
 
 const Room = lazy(() => import('./components/Room/Room'));
+
+function canShowRoom() {
+  try {
+    if (isMobile()) return false;
+    if (navigator.connection?.saveData) return false;
+  } catch {
+  }
+  return hasWebGL();
+}
 
 function shouldShowRoom() {
   try {
@@ -47,6 +55,16 @@ function Home() {
   const [phase, setPhase] = useState(() => (shouldShowRoom() ? 'room' : 'desktop'));
   const [positions, setPositions] = useState({});
   const isDesktop = useIsDesktop();
+  const [canLogOut] = useState(canShowRoom);
+
+  const handleLogout = useCallback(() => {
+    try {
+      sessionStorage.removeItem('entered');
+    } catch {
+    }
+    setSelectedComponent('home');
+    setPhase('room');
+  }, []);
 
   const handleMove = useCallback((key, pos) => {
     setPositions((prev) => ({ ...prev, [key]: pos }));
@@ -193,6 +211,7 @@ function Home() {
           current={selectedComponent}
           minimizedWidgets={minimized}
           onWidgetClick={handleWidgetClick}
+          onLogout={canLogOut ? handleLogout : undefined}
         />
       </div>
     </>

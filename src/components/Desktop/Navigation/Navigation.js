@@ -4,8 +4,9 @@ import './Navigation.css';
 import Tray from '../../Desktop/Tray/Tray';
 import ThemeToggle from '../../Desktop/ThemeToggle/ThemeToggle';
 import { ReactComponent as HomeIcon } from '../../../assets/home.svg';
+import Icon from '../../Shared/Icons/Icons'
 
-function Navigation({ onNavItemClick, current, minimizedWidgets, onWidgetClick }) {
+function Navigation({ onNavItemClick, current, minimizedWidgets, onWidgetClick, onLogout }) {
   const [now, setNow] = React.useState(new Date());
 
   React.useEffect(() => {
@@ -44,6 +45,12 @@ function Navigation({ onNavItemClick, current, minimizedWidgets, onWidgetClick }
 
       <Tray minimized={minimizedWidgets} onWidgetClick={onWidgetClick} />
       <ThemeToggle />
+
+      {onLogout && (
+        <button className="nav-logout" onClick={onLogout} aria-label="Log out" title="Log out">
+          <Icon name="power" />
+        </button>
+      )}
 
       <div className="taskbar-clock">
         <span>{now.toLocaleTimeString()}</span>
